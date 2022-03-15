@@ -49,7 +49,6 @@ Choose an individual to contact the client, -Eddie
 
 ### Identification of project risks (add brief comments on how they might be addressed if encountered). 
 
-```
 | Risks                 | Probability | Impact   |
 |-----------------------|-------------|----------|
 | Scope Creep           | 20%         | Marginal |
@@ -61,11 +60,9 @@ Choose an individual to contact the client, -Eddie
 | Integration Issues    | 5%          | Critical |
 
 (Example of a table in .md lifted from my 310 group project)
-```
 
 ### Initial forum post from Eddie:
 
-```
 Group A Project/Client Description
 by Edmund Sadgrove - Friday, 11 March 2022, 2:06 PM
 
@@ -86,4 +83,3 @@ All the best everyone,
 
 Regards
 Eddie
-```
