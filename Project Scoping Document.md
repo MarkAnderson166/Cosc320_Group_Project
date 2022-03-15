@@ -45,7 +45,7 @@ Choose an individual to contact the client, -Eddie
 
 ## Project timeline specified using a Gantt chart. 
 
-<img src="Gantt.PNG" alt="Gantt Chat" width="1000"/>
+<img src="Gantt.png" alt="Gantt Chat" width="1000"/>
 `(Example of an embedded picture in .md lifted from my 310 group project)`
 
 ## Identification of project risks (add brief comments on how they might be addressed if encountered). 
