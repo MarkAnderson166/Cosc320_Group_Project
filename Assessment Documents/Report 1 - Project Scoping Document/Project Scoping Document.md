@@ -1,11 +1,11 @@
-## Project title
+# Degree Completion Roadmap for Students
 
 ## Group members and contact details
 
-* Bullet points
+* Tully McDonald - tmcdon26@myune.edu.au
 * Mark Anderson - mander53@myune.edu.au
-* Bullet points
-* Bullet points
+* Nelson Pray - npray@myune.edu.au
+* Nicola Howard - nhoward7@myune.edu.au
 
 ## Client name and contact details
 
