@@ -19,42 +19,66 @@ Currently this is a manual process and the client would like this automated. The
 they have passed, along with any advanced standing credits, and after selecting a course version, the tool would output the remaining
 units required to fulfill their degree. 
 
-~~Senior management of student services at UNE are looking to automate some of the processes 
-they use to determine degree completion road maps for students. At the moment this is a 
-manual process that takes some time to complete. The hope is to automate at least the 
-simpler cases. The more complex may be a future project that will build on your process 
-that will be developed. 
-This should be an interesting project, as it will have a design and implementation stages 
-that individual students may complete. It will be interesting to see how successful it is.
-Choose an individual to contact the client, -Eddie~~
-
 ## Specification of client requirements (e.g. in terms of software deliverables, functionality).
-- Ability for student to enter their current progress
-- ie, the units they have already passed along with any advanced standing credits applied
-- also, enter the units that they are planning to do
-- this will be done via  web front end, possible a mobile app if there is time
+###### INPUT
+Ability for student to enter their current progress
+ie, the units they have already passed along with any advanced standing credits applied
+Also, enter the units that they are planning to do
+This will be done via  web front end, possible a mobile app if there is time
 
-- the student will also select their course version, from a list of those available for processing
+###### PROCESSING
+The student will also select their course version, from a list of those available for processing
+The processing engine will determine how the inputs from the student match the rules as defined by the handbook.
+This is the difficult part - how to turn the rules from the handbook into something that can be processed.
 
-
-
+###### OUTPUT
+The platform will advise the student what additional units are required.
+A roadmap of how to achieve this is a nice to have
 
 ## Statement of Project Scope (as specified by the student group and agreed by the client). 
+(project goals, deadlines and tasks
+(guide on all facets of project, from tasks to be completed to resources required
+(1. Define goals
+Deliverables
+1. Develop an HTML/web based platform that allows a student to capture their current course progress and advanced standing credits.
+The student must also select a course that they are comparing to.
+This state will not be stored - it is only for the life of the session
+2. A backend process to generate the rules for this course --- how?
+3. A processing engine to compare the student inputs with the course rules
+4. The web platform will display the results of the comparison
+
+The prototype will concentrate on processing the B.A degree
+If there is time further work around B.Comp and more complicated degrees can be reviewed. 
+
+Measurements
+UNE SS will provde dummy data to compare our processing with their manual process. They will also test against invalid data to ensure
+the platform picks up discrepencies
+
+
+2. Potential obstacles
+Timeous feedback from the client to ask for potential 
+
+
+
+
+
+Out of scope
+Roadmap of how to achieve completion of the degree
+checking prerequisites
+Complicated courses
+
+
 
 ## Feasibility Statement (identify technologies required, group skill set, time constraints, resource constraints etc.). 
 
-* It's 106 miles to Chicago
-* we got a full tank of gas
-* half a pack of cigarettes
-* it's dark... 
-* and we're wearing sunglasses
+
 
 ## Assignment of Team Member Responsibilities. 
 
-* Nicky - Vocals
-* Nelson - Guitar
-* Tully - Drums
-* Mark  - Bass
+* Nicola - Coordinator, Documentation, Project design and architecture
+* Nelson - 
+* Tully - 
+* Mark  - 
 
 ## Project timeline specified using a Gantt chart. 
 
@@ -73,4 +97,3 @@ Choose an individual to contact the client, -Eddie~~
 | Data Security Issues  | 5%          | Minor    |
 | Integration Issues    | 5%          | Critical |
 
-(Example of a table in .md lifted from my 310 group project)
