@@ -37,9 +37,9 @@ function button(){
 */
 
 function brokenRuleBox(ruleName, solutionArray, note){
-  $('#brokenRules').append('<div class="'+'boxClass'+'"><label for="'+'toGoBox'+'">'+
-                            ruleName+':<br></label><textarea rows="'+'18'+'" cols="'+'11'+'">'+
-                            note+solutionArray+'\n'+'</textarea></div>');
+  $('#brokenRules').append('<div class="'+'col'+'"><h3 class="'+'card-title'+'">'+
+                            ruleName+':<br></h3><textarea  rows="'+'20'+'">'+
+                            note+solutionArray+'</textarea></div>');
 }
 
 
