@@ -37,7 +37,7 @@ The processing engine will match the student information provided with a one of 
 ##### Output
 Once the processing has been completed, the platform will display how the student’s progress compares to the rules from the course handbook. It will identify any mandatory units that have not been completed and provide a list of units that still need to be attempted.
 
-An additional output that the client requested is for the platform to suggest a roadmap that the student can follow. The roadmap would provide the units that still need to be completed along with year and trimester that the unit is next availability. It should be noted that this is an optional output and may not be achieved.
+An additional output that the client requested is for the platform to suggest a roadmap that the student can follow. The roadmap would provide the units that still need to be completed along with year and trimester that the unit is next availabile. It should be noted that this is an optional output and may not be achieved.
 
 As part of this working prototype, the client is particularly interested to know the time and effort required to develop and produce the platform. A decision to move forward on this project will be dependent on whether the application is feasible within limited time and budget constraints.
 
@@ -52,18 +52,18 @@ The fundamental deliverables are
 •	Develop a desktop web-based platform that allows a student to upload their current course progress in CSV format.
 [Click here to see a sample]("\item3")
 
-•	Create a rule set for the courses being evaluated in this prototype, that is, B.A, B. Comp and B. Nursing for only 2021 and 2022 versions. This rule set will be created manually as we are unable to obtain the correctly formatted rules from the existing API. 
+•	Create a rule set for the courses being evaluated in this prototype, that is, B.A, B. Comp and B. Nursing for only 2021 and 2022 versions. This rule set will be entered manually during development as we are unable to obtain the correctly formatted rules from the existing API. 
 
 •	The backend of the platform will read the information from the CSV and match it with one of the rule sets (mentioned above) that have been prepared. If there is a match the processing engine will compare the student data to that of the rule set to produce an outcome.
 [Click here to see a sample]("\item4")
 
-•	The outcome will be rendered on the web site in a format that is easy to understand. It will also return the results within a 10 second time frame to ensure that the student has a good experience with the platform
-•	If the platform is unable to determine for any reason, it should display the reason on the web site and refer the student to SS for further investigation. 
+•	The outcome will be rendered on the website in a format that is easy to understand. 
+•	If the platform is unable to compile the roadmap for any reason, it should display the reason on the website and refer the student to SS for further investigation. 
 
 ##### Assumptions
 •	The student’s course progress will be produced by a system that does not exist. For this prototype the client will provide sample data in the form of CSV files that contain the necessary data.
 
-•	The CSV files provided will be consistent per course and version and will contain all units completed, as well as any units achieved from Advanced Standing. There is no need to differentiate between these. Where applicable it will contain the elected Major for the course.
+•	The CSV files provided will be consistent per course and version and will contain all units completed, as well as any units achieved from Advanced Standing. There is no need to differentiate between these. Where applicable it will contain the elected Major(s)/Minor(s) for the course.
 
 •	If the information provided indicates that a unit has been completed, the assumption is that the necessary prerequisites have also been satisfied. 
 
@@ -77,7 +77,7 @@ The fundamental deliverables are
 •	It may be difficult obtaining data and feedback from the client timeously due to more pressing commitments.
 
 ##### Acceptance criteria
-•	The web-site should be visually appealing and easy to use.
+•	The website should be visually appealing and easy to use.
 
 •	The outcome displayed to the student must be easily understandable.
 
@@ -111,6 +111,8 @@ The fundamental deliverables are
 •	This project should be achievable using Open Source software solutions and the prototype should be able to run on UNE Turing’s system.
 
 •	Communication via UNE’s internal email system, Slack, Zoom and Teams as required.
+
+•	Project time expenditure will be recorded using Clockify
 
 •	Version control is via Github
 
