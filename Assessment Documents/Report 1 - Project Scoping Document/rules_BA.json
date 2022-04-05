@@ -1,0 +1,31 @@
+{
+  "course": "Bachelor of Arts",
+  "abb": "BA",
+  "year": "2022",
+  "admission": [
+    "a",
+    "b",
+    "c",
+    "d"],
+  "core units": [
+    "HASS100",
+    "HASS101",
+    "WRIT101"],
+  "majors": [
+    "ANHIST001": [
+      "ANCH109",
+      "ANCH110",
+      "ANCH111"],
+    "CRIMSOCO01": [
+      ""]
+      
+    ],
+  "minors": [
+    "ANEB011",
+    "ANCNEEA011",
+    "ARPA011",
+    "etc"
+    ],
+  "listed": [],
+  "elective": "look these up in another json file"
+}
