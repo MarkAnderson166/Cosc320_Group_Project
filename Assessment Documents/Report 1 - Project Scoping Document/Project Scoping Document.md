@@ -37,7 +37,7 @@ The processing engine will match the student information provided with a one of 
 ##### Output
 Once the processing has been completed, the platform will display how the student’s progress compares to the rules from the course handbook. It will identify any mandatory units that have not been completed and provide a list of units that still need to be attempted.
 
-An additional output that the client requested is for the platform to suggest a roadmap that the student can follow. The roadmap would provide the units that still need to be completed along with year and trimester that the unit is next availabile. It should be noted that this is an optional output and may not be achieved.
+An additional output that the client requested is for the platform to suggest a roadmap that the student can follow. The roadmap should provide the student with a clear catered course plan outlining units yet to be completed and when said units can be attempted, taking into account; pre-requisites, co-requisites, restrictions, the student's preferred study load and any other relavent factors.
 
 As part of this working prototype, the client is particularly interested to know the time and effort required to develop and produce the platform. A decision to move forward on this project will be dependent on whether the application is feasible within limited time and budget constraints.
 
