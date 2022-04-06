@@ -19,6 +19,3 @@ Student services at UNE are looking to automate some of the processes they use t
  - test.json: JSON file from ADDA course Tully got from API
  - test.py: python script to play around with JSON and parsing to get useful information
  - app.py: Dash app similar to test.py just to experiment with
- - first_comparison : first logic and gui prototype
- - text_formatter.py : tool made to format unit lists.
- - student.csv : dummy student data for early testing
