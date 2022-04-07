@@ -2,9 +2,17 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"> 
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+  <script type="text/javascript" src="data.js"></script>
+  <script type="text/javascript" src="js/js.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
    <!-- Compiled and minified CSS -->
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
@@ -13,26 +21,47 @@
            
   <link rel="stylesheet" type="text/css" href="css/style.css">
 
-  <script
-  src="https://code.jquery.com/jquery-3.4.1.min.js"
-  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-  crossorigin="anonymous"></script>
-  <script type="text/javascript" src="data.js"></script>
-  <script type="text/javascript" src="js/js.js"></script>
 </head>
 
 <body>
+  <!-- Navigation -->
   <nav>
     <div class="nav-wrapper">
-      <a href="#" class="brand-logo center">
+      <a href="#" class="brand-logo left">
         Course Progression
       </a>
-
-        
+      <ul class="right">
+        <li><a class="modal-trigger" href="#uploadModal">Upload Data</a></li>
+        <li><a href="https://www.une.edu.au/current-students/support/student-support" target="_blank">Support</a></li>
+      </ul>
     </div>
   </nav>
+  <!--End of Navigation-->
+
+  <!--Upload Modal-->
+  <div id="uploadModal" class="modal">
+    <div class="modal-content">
+      <h4 class="center">Please Upload Your Student Data</h4>
+      <form id="csv_upload_form">
+        <div class="file-field input-field">
+          <div class="btn btn-primary">
+            <span>Upload File</span>
+            <input type="file" id="csvFile" accept=".csv" />
+          </div>
+          <div class="file-path-wrapper">
+            <input class="file-path validate" type="text">
+          </div>
+        </div>
+        <input type="submit" class="btn btn-primary btn-large" value="Submit" />
+      </form>
+    </div>
+  </div>
+  <!--End of Modal-->
+
+  <!--Main Container-->
   <div class="container z-depth-3">
     <div class="row">
+      <!--Rules and Completed Container-->
       <div class="col l4 m4 s12">
         <div class="card hoverable large">
           <div class="card-content">
@@ -50,14 +79,12 @@
                 </div>
               </div>
             </div>
-            <!-- <button type="button" class="btn btn-primary btn-large">Submit</button> -->
-            <form id="csv_upload_form">
-              <input type="file" id="csvFile" accept=".csv" /><br>
-              <input type="submit" class="btn btn-primary btn-large" value="Submit" />
-            </form>
           </div>
         </div>
       </div>
+      <!--End of Rules and Completed Container-->
+
+      <!--Rules Breakdown Container-->
       <div class="col l8 m8 s12">
         <div class="card hoverable large">
           <div class="card-content">
@@ -66,9 +93,20 @@
           </div>
         </div>
       </div>
+      <!--End of Rules Breakdown Container-->
+
     </div>
   </div>
+  <!--End of Main Container-->
   
+  <!--Event Listener to get Modal to work-->
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('.modal').modal({
+      // specify options here
+      });
+    });
+  </script>
 </body>
 
 
@@ -90,7 +128,7 @@
   </div>
 
  
-  <div id ="brokenRules" class="wrapper"><h4>Rule Breakdown</h4></div> -->
+  <div id ="brokenRules" class="wrapper"><h4>Rule Breakdown</h4></div>
 
-</body>
+</body>-->
 </html>
