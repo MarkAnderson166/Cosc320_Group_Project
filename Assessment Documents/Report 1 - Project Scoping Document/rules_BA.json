@@ -7,6 +7,12 @@
     "b",
     "c",
     "d"],
+  "rules" : [
+    { "description": "core unit completion check", "type" : "minimum", "units" : "core units", "cp" : "72"},
+    { "description": "300-level completion check", "type" : "minimum", "units" : "null", "cp" : "36"}, 
+    { "description": "100-level limitation check", "type" : "maximum", "units" : "null", "cp" : "60"},
+    { "final data structure" : " to be decided  "}
+    ],
   "core units": [
     "HASS100",
     "HASS101",
