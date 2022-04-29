@@ -1,0 +1,181 @@
+Core_1,,,,
+AMTH140,6,2,null,Discrete Mathematics
+COSC110,6,123,null,Introduction to Programming and the UNIX Environment
+COSC120,6,12,null,Object Oriented Programming
+COSC210,6,1,null,Database Management Systems
+COSC220,6,2,null,Software Development Studio 2
+COSC230,6,1,null,Data Structures and Algorithms
+COSC240,6,2,null,Operating Systems
+COSC310,6,1,null,Software Project Management
+COSC320,6,12,null,Information Technology Project
+MTHS120,6,12,null,Calculus and Linear Algebra 1
+Core_2,,,,
+COSC101,6,2,null,Software Development Studio 1
+COSC101,6,1,null,Data Science Studio 1
+Core_3,,,,
+MTHS130,6,23,null,Calculus and Linear Algebra 2
+STAT100,6,23,null,Introduction to Statistical Modelling
+Major,,,,
+Software_Development,,,,
+Prescribed_1,,,,
+COSC250,6,1,null,Programming Paradigms
+COSC260,6,2,null,Web Programming
+Prescribed_2,,,,
+COSC330,6,2,null,Parallel and Distributed Computing
+COSC340,6,1,null,Computer Networks and Information Security
+COSC350,6,2,null,Artificial Intelligence
+COSC360,6,2,null,Advanced Web Programming
+COSC370,6,1,null,User Experience and Interaction Design
+Listed,,,,
+AFM101,6,123,null,Introduction to Financial Accounting
+AFM112,6,123,null,Introduction to Management Accounting
+AFM211,6,123,null,Intermediate Financial Accounting
+AFM231,6,123,null,Corporate Finance
+AFM242,6,123,null,Financial Instruments and Markets
+AFM305,6,123,null,Advanced Financial Accounting
+AFM319,6,123,null,Auditing
+AFM322,6,123,null,Small Business Finance
+BIOL110,6,123,null,Biology I
+BIOL120,6,123,null,Biology II
+GENE210,6,123,null,Introductory Genetics
+GENE251/351,6,123,null,Introduction to Breeding and Genetics
+GENE322,6,123,null,Genetics of Populations
+GENE352,6,123,null,Genomic Analysis and Bioinformatics
+CHEM110,6,123,null,Chemistry I
+CHEM120,6,123,null,Chemistry II
+CHEM204,6,123,null,Biological and Organic Chemistry
+CHEM210,6,123,null,Quantum and Thermal Structure
+CHEM220,6,123,null,Chemical Reactivity
+CHEM250,6,123,null,Analytical Chemistry
+CHEM302,6,123,null,Organic Structure and Reactivity
+CHEM303,6,123,null,Medicinal Chemistry
+CHEM305,6,123,null,Applied Physical Chemistry
+THEA134,6,123,null,Speaking in Public
+WRIT101,6,123,null,The Craft of Academic Writing
+COSC301,6,123,null,Special Topic in Computing
+COSC372,6,123,null,Management Information Systems
+COSC380,6,123,null,Algorithms in Machine Learning
+ECON101,6,123,null,Introductory Microeconomics
+ECON102,6,123,null,Introductory Macroeconomics
+ECON201,6,123,null,Intermediate Microeconomics
+ECON202,6,123,null,Intermediate Macroeconomics
+ECON203,6,123,null,Banking and Finance
+ECON311,6,123,null,Contemporary Macroeconomic Issues
+ECON328,6,123,null,Microeconomic Policy Evaluation
+ECON377,6,123,null,Efficiency and Productivity Analysis
+LING101,6,123,null,Introduction to Linguistics
+LING102,6,123,null,Foundations of Linguistics
+LING365,6,123,null,Phonetics and Phonology
+LING366,6,123,null,Australia's Indigenous Languages
+AMTH250,6,123,null,Introduction to Programming in The Sciences
+MTHS110,6,123,null,Quantitative Skills with Applications
+PMTH212,6,123,null,Multivariable Calculus
+PMTH213,6,123,null,Linear Algebra
+PMTH331,6,123,null,Introduction to Topology
+PMTH332,6,123,null,Abstract Algebra
+PMTH333,6,123,null,Complex Analysis
+PMTH338,6,123,null,Number Theory
+PMTH339,6,123,null,Differential Equations
+PHYS131,6,123,null,Applied Physics I
+PHYS132,6,123,null,Applied Physics II
+PHYS204,6,123,null,Electromagnetism 1
+PHYS207,6,123,null,Fluid Mechanics
+PHYS211,6,123,null,Introduction to Electronics
+PHYS301,6,123,null,Microscopic to Macroscopic Physics and Chemistry
+PHYS311,6,123,null,Digital Electronic Systems
+PHYS313,6,123,null,Applied Photonics
+PSYC101,6,123,null,Introductory Psychology I
+PSYC102,6,123,null,Introductory Psychology II
+PSYC206,6,123,null,Cognitive Psychology
+SCI210,6,123,null,Introduction to Scientific Programming
+SOCY100,6,123,null,Introduction to Sociology
+SOCY110,6,123,null,Foundations of Society
+SOCY313,6,123,null,Social Policy
+SOCY345,6,123,null,Mixed Methods in Social Research
+MATH260,6,123,null,Probability and Simulation
+STAT210,6,123,null,Statistical Modelling and Experimental Design
+STAT270,6,123,null,Inference
+STAT320,6,123,null,Advanced Statistical Modelling
+STAT330,6,123,null,Statistical Learning
+Data_Science,,,,
+Prescribed_1,,,,
+COSC250,6,1,null,Programming Paradigms
+STAT210,6,1,null,Statistical Modelling and Experimental Design
+Prescribed_2,,,,
+COSC330,6,2,null,Parallel and Distributed Computing
+COSC350,6,2,null,Artificial Intelligence
+COSC380,6,2,null,Algorithms in Machine Learning
+STAT330,6,1,null,Statistical Learning
+Listed,,,,
+BIOL110,6,123,null,Biology I
+BIOL120,6,123,null,Biology II
+GENE210,6,123,null,Introductory Genetics
+GENE251/351,6,123,null,Introduction to Breeding and Genetics
+GENE322,6,123,null,Genetics of Populations
+CHEM110,6,123,null,Chemistry I
+CHEM120,6,123,null,Chemistry II
+CHEM204,6,123,null,Biological and Organic Chemistry
+CHEM210,6,123,null,Quantum and Thermal Structure
+CHEM220,6,123,null,Chemical Reactivity
+CHEM250,6,123,null,Analytical Chemistry
+CHEM302,6,123,null,Organic Structure and Reactivity
+CHEM303,6,123,null,Medicinal Chemistry
+CHEM305,6,123,null,Applied Physical Chemistry
+THEA134,6,123,null,Speaking in Public
+WRIT101,6,123,null,The Craft of Academic Writing
+COSC260,6,123,null,Web Programming
+COSC301,6,123,null,Special Topic in Computing
+COSC340,6,123,null,Computer Networks and Information Security
+COSC360,6,123,null,Advanced Web Programming
+COSC370,6,123,null,User Experience and Interaction Design
+COSC372,6,123,null,Management Information Systems
+GEOL110,6,123,null,Geology and the Environment I
+GEOL120,6,123,null,Geology and the Environment II
+EM333,6,123,null,Spatial Analysis and Modelling
+EM334,6,123,null,Introduction to GIS and Spatial Thinking
+EM336,6,123,null,Remote Sensing and Image Analysis
+GEOL312,6,123,null,Geophysics and Applied GIS for Earth Sciences
+LING101,6,123,null,Introduction to Linguistics
+LING102,6,123,null,Foundations of Linguistics
+LING365,6,123,null,Phonetics and Phonology
+LING369,6,123,null,Morphology and Syntax
+AMTH250,6,123,null,Introduction to Programming in The Sciences
+MTHS110,6,123,null,Quantitative Skills with Applications
+PMTH212,6,123,null,Multivariable Calculus
+PMTH213,6,123,null,Linear Algebra
+PMTH331,6,123,null,Introduction to Topology
+PMTH332,6,123,null,Abstract Algebra
+PMTH333,6,123,null,Complex Analysis
+PMTH338,6,123,null,Number Theory
+PMTH339,6,123,null,Differential Equations
+PHYS131,6,123,null,Applied Physics I
+PHYS132,6,123,null,Applied Physics II
+PHYS204,6,123,null,Electromagnetism 1
+PHYS207,6,123,null,Fluid Mechanics
+PHYS211,6,123,null,Introduction to Electronics
+PHYS301,6,123,null,Microscopic to Macroscopic Physics and Chemistry
+PHYS311,6,123,null,Digital Electronic Systems
+PHYS313,6,123,null,Applied Photonics
+PSYC101,6,123,null,Introductory Psychology I
+PSYC102,6,123,null,Introductory Psychology II
+PSYC206,6,123,null,Cognitive Psychology
+SCI210,6,123,null,Introduction to Scientific Programming
+SOCY100,6,123,null,Introduction to Sociology
+SOCY110,6,123,null,Foundations of Society
+SOCY313,6,123,null,Social Policy
+SOCY345,6,123,null,Mixed Methods in Social Research
+MATH260,6,123,null,Probability and Simulation
+STAT270,6,123,null,Inference
+STAT320,6,123,null,Advanced Statistical Modelling
+Double_Major,,,,
+Prescribed,,,,
+COSC250,6,1,null,Programming Paradigms
+COSC260,6,2,null,Web Programming
+STAT210,6,1,null,Statistical Modelling and Experimental Design
+COSC330,6,2,null,Parallel and Distributed Computing
+COSC340,6,1,null,Computer Networks and Information Security
+COSC350,6,2,null,Artificial Intelligence
+COSC360,6,2,null,Advanced Web Programming
+COSC370,6,1,null,User Experience and Interaction Design
+COSC380,6,2,null,Algorithms in Machine Learning
+STAT330,6,1,null,Statistical Learning

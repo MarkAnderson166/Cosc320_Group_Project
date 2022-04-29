@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <script>
+    window.console = window.console || function(t) {};
+  </script>
+  <script>
+    if (document.location.search.match(/type=embed/gi)) {
+      window.parent.postMessage("resize", "*");
+    }
+  </script>
+  <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script> -->
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.js'></script>
+  <script src='js/js.js' id="rendered-js" type="module"></script>  
+  <script type="text/javascript" src="data.js"></script>
+
+</head>
+
+  <h2>Drag &amp; Drop Course Planner &nbsp;  &nbsp; 
+   &nbsp; ||  Years menu (6) ||</h2>
+   <div id ="button_container">
+    <form id="csv_upload_form">
+      <div class="file-field input-field">
+        <div class="btn btn-primary">
+          <span>Upload File</span>
+          <input type="file" id="csvFile" />
+          <input type="submit" class="btn btn-primary btn-large" value="Submit" />
+        </div>
+      </div>
+    </form>
+  </div> 
+
+<div id="main_container">
+
+
+  <div class="leftColumn">  
+
+  </div>
+
+  <div class="middleColumn">   
+    <li id="infoBoxBox">
+      <div class="infoBox studentInfoBox">
+        student info:
+        Gpa tracker
+        CP tracker
+      </div>
+      <div class="infoBox unitInfoBox">unit info box</div>
+    </li>
+  </div>
+
+  <div class="rightColumn">  
+
+  </div>
+
+</div>
+</body>
+
+<footer>
+  <p>Built with <a href="https://github.com/bevacqua/dragula" target="_blank">Dragula</a> and Vanilla JS by <a href="http://nikkipantony.com" target="_blank">Nikki Pantony</a></p>
+</footer>
+
+
+
+</html>
