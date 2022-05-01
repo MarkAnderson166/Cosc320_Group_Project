@@ -25,7 +25,7 @@ var dummyData = {
                         
     //"Major" : {
 
-      "SOFTDEV" : {
+      "SOFTDEV002.5" : {
         "Prescribed_1" : [  6,
           { "Code" :  "COSC250", "CP" : "6", "TriAvail" : "1", "Prereq" : "null", "Name" : "Programming Paradigms"},
           { "Code" :  "COSC260", "CP" : "6", "TriAvail" : "2", "Prereq" : "null", "Name" : "Web Programming"},
@@ -111,7 +111,7 @@ var dummyData = {
           ],
       },
 
-      "Data_Science" : {
+      "DATASC001.1 N Data Science" : {
         "Prescribed_1" : [  6,
           { "Code" :  "COSC250", "CP" : "6", "TriAvail" : "1", "Prereq" : "null", "Name" : "Programming Paradigms"},
           { "Code" :  "STAT210", "CP" : "6", "TriAvail" : "1", "Prereq" : "null", "Name" : "Statistical Modelling and Experimental Design"},

@@ -23,6 +23,7 @@ window.onload = function() {
 
         // break .csv into 2 arrays
       const headers = (uploaded).slice(0,(uploaded).indexOf("\n")).split(",");
+      console.log(headers)
       var value =  (uploaded).slice((uploaded).indexOf("\n")).split(",");
 
         // combine arrays into a dictionary
@@ -100,7 +101,10 @@ function printStudentData(studentData, studentRemainingOptions){
 
 
 
-// Filter Functions:
+
+
+
+//----------------------- Filter Functions: ----------------------
 
 /*----------------------------------------------------
   filterUnitsByDegree()
@@ -114,10 +118,12 @@ function printStudentData(studentData, studentRemainingOptions){
 function filterUnitsByDegree(studentData, dummyData){
   var arrOfLists = []
 
-    // this will be a basted ... - needs to make an array of 'unit blocks'
+    // variantCodes is an array of 'unit blocks'
     // these are in the 'Unit Sets (Completed)', 'Unit Sets (Non-Completed)',
-    //             AND 'Adv Stnd Units'   <-- problem
-  var arrayVariantCodes = ['SOFTDEV','Rule_A_F']  
+    // AND 'Adv Stnd Units', its messy and the array has extra stuff, but it works.
+  var variantCodes = (studentData['Adv Stnd Units']+studentData['Unit Sets (Completed)']+studentData['Unit Sets (Non-Completed)\r'])
+  variantCodes = ((variantCodes.replace(/(['",])/g,' ')).split(' ')).filter(item => item.length > 4 );
+  //console.log(variantCodes)
 
   $.each(dummyData,function (degreeCode, arrOfArrs) { 
     if (degreeCode === studentData['COURSE_CD']){
@@ -125,7 +131,7 @@ function filterUnitsByDegree(studentData, dummyData){
         if (typeof(value[0]) === 'number' ) {
           arrOfLists.push(value)         // missing name problem is here
         } else {
-          if (arrayVariantCodes.includes(index)){
+          if (variantCodes.includes(index)){
             $.each(value,function (index, value1) { 
               if (typeof(value1[0]) === 'number' ) {
                 arrOfLists.push(value1)  // missing name problem is here
