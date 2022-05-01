@@ -1,0 +1,69 @@
+Rule A and Rule F, ,123, null, 
+HHSC111, 6 CP,1, null, Science for Nurses 1
+HHSC112, 6 CP,2, null, Science for Nurses 2
+HLTH101, 6 CP,13, null, Information and Evidence in Health and Social Care
+HLTH102, 6 CP,13, null, Interprofessional Practice in Health and Social Care
+HLTH103, 6 CP,23, null, Communication for Health Professionals
+HLTH104, 6 CP,23, null, The Context of the Health and Community Services
+HSNS170, 6 CP,1, null, Frameworks for Nursing Practice
+HSNS171, 6 CP,1, null, Fundamentals of Nursing Practice 1
+HSNS173, 6 CP,2, null, Fundamentals of Nursing Practice 2
+HSNS246, 6 CP,12, null, Integrated Nursing Practice 5: Primary and Community Health Care
+HSNS263, 6 CP,13, null, Integrated Nursing Practice 1
+HSNS264, 6 CP,13, null, Integrated Nursing Practice 2
+HSNS270, 6 CP,12, null, Integrated Nursing Practice 4
+HSNS273, 6 CP,12, null, Integrated Nursing Practice 6
+HSNS310, 6 CP,13, null, Integrated Nursing Practice 3: Mental Health Nursing
+HSNS362, 6 CP,1, null, Transforming Nursing Practice 1
+HSNS363, 6 CP,23, null, Transforming Nursing Practice 2
+HSNS370, 6 CP,23, null, Transforming Nursing Practice 3: Nursing Older People
+HSNS373, 12 CP,123, null, Transitioning to Practice 1
+HSNS374, 6 CP,13, null, Clinical Leadership and Governance in Nursing
+HSNS376, 12 CP,23, null, Transitioning to Practice 2
+OORA200, 6 CP,12, null, Working with Aboriginal People
+Rule B and Rule E, ,123, null, 
+HLTH101, 6 CP,13, null, Information and Evidence in Health and Social Care
+HSNS246, 6 CP,12, null, Integrated Nursing Practice 5: Primary and Community Health Care
+HSNS263, 6 CP,13, null, Integrated Nursing Practice 1
+HSNS264, 6 CP,13, null, Integrated Nursing Practice 2
+HSNS270, 6 CP,12, null, Integrated Nursing Practice 4
+HSNS273, 6 CP,12, null, Integrated Nursing Practice 6
+HSNS310, 6 CP,13, null, Integrated Nursing Practice 3: Mental Health Nursing
+HSNS362, 6 CP,1, null, Transforming Nursing Practice 1
+HSNS363, 6 CP,23, null, Transforming Nursing Practice 2
+HSNS370, 6 CP,23, null, Transforming Nursing Practice 3: Nursing Older People
+HSNS373, 12 CP,123, null, Transitioning to Practice 1
+HSNS374, 6 CP,13, null, Clinical Leadership and Governance in Nursing
+HSNS376, 12 CP,23, null, Transitioning to Practice 2
+OORA200, 6 CP,12, null, Working with Aboriginal People
+Rule C, ,123, null, 
+HSNS207, 12 CP,23, null, Foundations of Nursing in the Australian Context
+HSNS246, 6 CP,12, null, Integrated Nursing Practice 5: Primary and Community Health Care
+HSNS263, 6 CP,13, null, Integrated Nursing Practice 1
+HSNS264, 6 CP,13, null, Integrated Nursing Practice 2
+HSNS270, 6 CP,12, null, Integrated Nursing Practice 4
+HSNS273, 6 CP,12, null, Integrated Nursing Practice 6
+HSNS310, 6 CP,13, null, Integrated Nursing Practice 3: Mental Health Nursing
+HSNS362, 6 CP,1, null, Transforming Nursing Practice 1
+HSNS363, 6 CP,23, null, Transforming Nursing Practice 2
+HSNS370, 6 CP,23, null, Transforming Nursing Practice 3: Nursing Older People
+HSNS373, 12 CP,123, null, Transitioning to Practice 1
+HSNS374, 6 CP,13, null, Clinical Leadership and Governance in Nursing
+HSNS376, 12 CP,23, null, Transitioning to Practice 2
+OORA200, 6 CP,12, null, Working with Aboriginal People
+Rule D, ,123, null, 
+HLTH101, 6 CP,13, null, Information and Evidence in Health and Social Care
+HSNS207, 12 CP,23, null, Foundations of Nursing in the Australian Context
+HSNS246, 6 CP,12, null, Integrated Nursing Practice 5: Primary and Community Health Care
+HSNS263, 6 CP,13, null, Integrated Nursing Practice 1
+HSNS264, 6 CP,13, null, Integrated Nursing Practice 2
+HSNS270, 6 CP,12, null, Integrated Nursing Practice 4
+HSNS273, 6 CP,12, null, Integrated Nursing Practice 6
+HSNS310, 6 CP,13, null, Integrated Nursing Practice 3: Mental Health Nursing
+HSNS362, 6 CP,1, null, Transforming Nursing Practice 1
+HSNS363, 6 CP,23, null, Transforming Nursing Practice 2
+HSNS370, 6 CP,23, null, Transforming Nursing Practice 3: Nursing Older People
+HSNS373, 12 CP,123, null, Transitioning to Practice 1
+HSNS374, 6 CP,13, null, Clinical Leadership and Governance in Nursing
+HSNS376, 12 CP,23, null, Transitioning to Practice 2
+OORA200, 6 CP,12, null, Working with Aboriginal People

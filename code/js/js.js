@@ -27,21 +27,24 @@ window.onload = function() {
 
         // combine arrays into a dictionary
       value = removeNewlines(value);
-      var pairs = {};
+      var studentData = {};
       for (var i=0; i<headers.length; i++) {
         if (value[i].includes('\r')){
-          pairs[headers[i]] = (value[i].split("\r"));
+          studentData[headers[i]] = (value[i].split("\r"));
         } else {
-          pairs[headers[i]] = value[i];
+          studentData[headers[i]] = value[i];
         }
       }
 
+      const completedUnits = ((studentData['Completed Units']+studentData['Adv Stnd Units']).replace(/(['",])/g,' ')).split(' ')
+      const studentTotalOptions =     filterUnitsByDegree(studentData, dummyData)
+      const studentRemainingOptions = filterUnitsByCompleted(completedUnits, studentTotalOptions)
 
-      printStudentData(pairs);
+      printStudentData(studentData, studentRemainingOptions);
 
 
       // make ui
-      var startYear = parseInt(pairs['COMMENCEMENT_DT'].substr(-4,4));
+      var startYear = parseInt(studentData['COMMENCEMENT_DT'].substr(-4,4));
       $('.leftColumn').empty()
       $('.rightColumn').empty()
       selectDegree('arrName', dummyData);
@@ -51,35 +54,143 @@ window.onload = function() {
       // anything that happens after file upload has to be called here
 
 
-
-
     };
     reader.readAsText(input);
   });
 }
 
 
+    // I will need to make this recursive later. (probably)
 function removeNewlines(arr) {
   var newArr = [];
   for (var i = 0; i < arr.length; i++)
-    if (Array.isArray(arr[i])){
+    //if (Array.isArray(arr[i])){
       newArr.push(arr[i].replace(/\n/g,''));
-    }
-    else{
-      newArr.push(arr[i].replace(/\n/g,''))
-    }
+    //}
+    //else{
+    //  newArr.push(arr[i].replace(/\n/g,''))
+    //}
   return newArr
 }
 
 
-function printStudentData(pairs){
-  console.log(pairs);
-  console.log(pairs['COURSE_CD']);
-  console.log(pairs['Completed Units']);
-  $.each(pairs,function (key, value) { 
+    // Just dump our results to the main window
+function printStudentData(studentData, studentRemainingOptions){
+  //console.log(studentData);
+  //console.log(studentData['COURSE_CD']);
+  //console.log(studentData['Completed Units']);
+  $.each(studentData,function (key, value) { 
     $('#button_container').append(key+': '+value+'<br>')
   })
+  console.log('studentRemainingOptions = \n');
+  console.log(studentRemainingOptions);
+  $('#button_container').append('<br><br> student recommendations: <br><br>')
+  $.each(studentRemainingOptions,function (key, value) {
+    $.each(value,function (index, unit) { 
+      if (typeof(unit) === 'number' ) {
+        $('#button_container').append('Student '+studentData['STUDENTNUMBER']+
+                      ' needs to complete '+unit+' credit points from: <br>')
+      } else  {
+        $('#button_container').append(unit['Code']+'<br>')
+        //$('#button_container').append(JSON.stringify(unit)+'<br>')
+      }
+    })
+  })
 }
+
+
+
+// Filter Functions:
+
+/*----------------------------------------------------
+  filterUnitsByDegree()
+  
+  arg:      dict of student data (from csv) { key:value, key:[val1,val2] }
+  arg:      entire data.js file 
+  returns:  array of total student options: [ [core],[major],[minor] ]
+  side-effect  - null
+-------------------------------------------------*/
+
+function filterUnitsByDegree(studentData, dummyData){
+  var arrOfLists = []
+
+    // this will be a basted ... - needs to make an array of 'unit blocks'
+    // these are in the 'Unit Sets (Completed)', 'Unit Sets (Non-Completed)',
+    //             AND 'Adv Stnd Units'   <-- problem
+  var arrayVariantCodes = ['SOFTDEV','Rule_A_F']  
+
+  $.each(dummyData,function (degreeCode, arrOfArrs) { 
+    if (degreeCode === studentData['COURSE_CD']){
+      $.each(arrOfArrs,function (index, value) { 
+        if (typeof(value[0]) === 'number' ) {
+          arrOfLists.push(value)         // missing name problem is here
+        } else {
+          if (arrayVariantCodes.includes(index)){
+            $.each(value,function (index, value1) { 
+              if (typeof(value1[0]) === 'number' ) {
+                arrOfLists.push(value1)  // missing name problem is here
+              } 
+            });
+          }
+        }
+      });
+    }
+  });
+  //console.log(arrOfLists)
+  return arrOfLists
+}
+
+/* ----------------------------------------------------
+  filterUnitsByCompleted()
+
+  arg:      array of options [ [],[],[] ]
+  arg:      array of completed(+adv standing) []
+  returns:  array of reccommendation arrays: [ [],[],[] ]
+  side-effect  - dumps to console list of things that didn't match
+------------------------------------------------- */
+
+function filterUnitsByCompleted(completedUnits, studentTotalOptions){
+  var newArr = [];
+  var completedFilter = [];
+
+  $.each(studentTotalOptions,function (index, list) {
+    var newSubArr = [];
+    $.each(list,function (index2, unit) {
+      if (completedUnits.includes(unit['Code'])){
+        //console.log('Ive done: '+unit['Code']);
+        newSubArr[0] = parseInt(newSubArr[0])-parseInt(unit['CP'])
+        completedFilter.push(unit['Code']);
+      } else{
+        newSubArr.push(unit);
+      }
+    });
+    newArr.push(newSubArr);
+  });
+
+      // list completed elements that didn't match any options
+  var unMatched = []
+  unMatched = completedUnits.filter(item => !completedFilter.includes(item));
+  unMatched = unMatched.filter(item => item.length > 4 && item.slice(0,4) != 'TRI-' );
+  if (unMatched.length > 0){
+    console.log('Things left in -completed- after filtering,  possible electives? ...: ');
+    console.log(unMatched);
+  }
+
+  return newArr;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

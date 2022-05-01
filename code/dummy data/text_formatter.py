@@ -15,9 +15,9 @@
 # bSci
 
 format = '{ "Code" :  "$Code", "CP" : "$CP", "TriAvail" : "$TriAvail", "Prereq" : "$Prereq", "Name" : "$Name"},'
-outputFile = open("bCompSci.txt","w+")
+outputFile = open("bNursing.txt","w+")
 
-with open('bCompSci.csv') as arrayFile:
+with open('bNursing.csv') as arrayFile:
   for line in arrayFile:
     if (len(line) < 20):
       outputFile.writelines('],\n"'+line[:-5]+'" : [  6,\n')
