@@ -13,7 +13,7 @@ var duration = 4;
 
 window.onload = function() {
 
-  button_container.addEventListener("submit", function (e) {
+  uploadModal.addEventListener("submit", function (e) {
     e.preventDefault();
     const input = csvFile.files[0];
     const reader = new FileReader();
@@ -46,7 +46,7 @@ window.onload = function() {
 
       // make ui
       var startYear = parseInt(studentData['COMMENCEMENT_DT'].substr(-4,4));
-      $('.leftColumn').empty()
+      $('#leftColumn').empty()
       $('.rightColumn').empty()
       selectDegree('arrName', dummyData);
       buildYearGrid(startYear, duration);
@@ -231,9 +231,9 @@ function buildUnitList(listName, arr){
   if (listName.includes('scri') || listName.includes('isted')) {
     col = '.rightColumn';
   } else {
-    col = '.leftColumn';
+    col = '#leftColumn';
   }
-  $(col).append('<li class="column '+listName+'_column">'+
+  $(col).append('<li class="column '+listName+'_column card">'+
             '      <div class="column_header">'+
             '        <h4>10 from this list</h4>'+
             '      </div>'+
@@ -262,21 +262,21 @@ function buildYearGrid(startYear, numberOfYears){
   });
 
   for (let i = 1; i < numberOfYears+1; i++) {
-    $('.middleColumn').append(
-      '<li class="year_box">'+
-      '<ul class="trimester_box ">'+
+    $('#middleColumn').append(
+      '<div class="year_box row">'+
+      '<ul class="trimester_box col l4 m4 s4">'+
       '  <div class="trimester_box_header">Tri 1 '+(startYear+i)+'</div>'+
       '  <ul class="unit_list" id="t1y'+i+'"></ul>'+
       '</ul>'+
-      '<ul class="trimester_box ">'+
+      '<ul class="trimester_box col l4 m4 s4">'+
       '  <div class="trimester_box_header">   Tri 2 '+(startYear+i)+'</div>'+
       '  <ul class="unit_list" id="t2y'+i+'"></ul>'+
       '</ul>'+
-      '<ul class="trimester_box ">'+
+      '<ul class="trimester_box col l4 m4 s4">'+
       '  <div class="trimester_box_header">   Tri 3 '+(startYear+i)+'</div>'+
       '  <ul class="unit_list" id="t3y'+i+'"></ul>'+
       '</ul>'+
-      '</li>'
+      '</div>'
     )
     arrForDragula.push(document.getElementById("t1y"+i));
     arrForDragula.push(document.getElementById("t2y"+i));

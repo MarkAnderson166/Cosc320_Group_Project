@@ -4,6 +4,11 @@
 
 <head>
   <meta charset="UTF-8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <script>
     window.console = window.console || function(t) {};
@@ -21,54 +26,82 @@
   <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script> -->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.2/dragula.js'></script>
-  <script src='js/js.js' id="rendered-js" type="module"></script>  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <script src='js/js.js' id="rendered-js" type="text/javascript"></script>  
   <script type="text/javascript" src="data.js"></script>
 
 </head>
+<body>
+  <!-- Navigation -->
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo left">
+        Course Progression
+      </a>
+      <ul class="right">
+        <li><a class="modal-trigger" href="#uploadModal">Upload Data</a></li>
+        <li><a href="https://www.une.edu.au/current-students/support/student-support" target="_blank">Support</a></li>
+      </ul>
+    </div>
+  </nav>
+  <!-- End of Navigation -->
 
-  <h2>Drag &amp; Drop Course Planner &nbsp;  &nbsp; 
-   &nbsp; ||  Years menu (6) ||</h2>
-   <div id ="button_container">
-    <form id="csv_upload_form">
-      <div class="file-field input-field">
-        <div class="btn btn-primary">
-          <span>Upload File</span>
-          <input type="file" id="csvFile" />
-          <input type="submit" class="btn btn-primary btn-large" value="Submit" />
+  <!-- Modal -->
+  <div id="uploadModal" class="modal">
+    <div class="modal-content">
+      <h4 class="center">Please Upload Your Student Data</h4>
+      <form id="csv_upload_form">
+        <div class="file-field input-field">
+          <div class="btn btn-primary">
+            <span>Upload File</span>
+            <input type="file" id="csvFile" accept=".csv" />
+          </div>
+          <div class="file-path-wrapper">
+            <input class="file-path validate" type="text">
+          </div>
         </div>
+        <input type="submit" class="btn btn-primary btn-large" value="Submit" />
+      </form>
+    </div>
+  </div>
+  <!--End of Modal-->
+
+  <!-- <div id="button_container"></div> -->
+
+  <!-- Main Body-->
+  <div id="main_container", class="container z-depth-3">
+    <div class="row">
+      <!--Left Column-->
+      <div id="leftColumn" class="leftColumn col l3 m3 s12"></div>
+      <!--Middle Column-->
+      <div id="middleColumn" class="middleColumn  col l6 m6 s12">
+        <div class="row infoBoxBox card">
+          <div class="infoBox studentInfoBox col l4 m4 s12">
+            student info:
+            Gpa tracker
+            CP tracker
+          </div>
+          <div class="infoBox unitInfoBox col l8 m8 s12">unit info box</div>
+        </div>   
       </div>
-    </form>
-  </div> 
+      <!--End of Middle Column-->
+      <!--Right Column-->
+      <div class="rightColumn col l3 m6 s12"></div>
 
-<div id="main_container">
-
-
-  <div class="leftColumn">  
-
+    </div>
   </div>
+  <!--End of Main Body-->
 
-  <div class="middleColumn">   
-    <li id="infoBoxBox">
-      <div class="infoBox studentInfoBox">
-        student info:
-        Gpa tracker
-        CP tracker
-      </div>
-      <div class="infoBox unitInfoBox">unit info box</div>
-    </li>
-  </div>
-
-  <div class="rightColumn">  
-
-  </div>
-
-</div>
+  <footer>
+    <p>Built with <a href="https://github.com/bevacqua/dragula" target="_blank">Dragula</a> and Vanilla JS by <a href="http://nikkipantony.com" target="_blank">Nikki Pantony</a></p>
+  </footer>
+  <!--Event Listener to get Modal to work-->
+  <script type="text/javascript">
+    $(document).ready(function(){
+      $('.modal').modal({
+      // specify options here
+      });
+    });
+  </script>
 </body>
-
-<footer>
-  <p>Built with <a href="https://github.com/bevacqua/dragula" target="_blank">Dragula</a> and Vanilla JS by <a href="http://nikkipantony.com" target="_blank">Nikki Pantony</a></p>
-</footer>
-
-
-
 </html>

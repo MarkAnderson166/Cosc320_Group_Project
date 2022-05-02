@@ -1,9 +1,26 @@
 
 @import url("https://fonts.googleapis.com/css?family=Arimo:400,700|Roboto+Slab:400,700");
 
-:root {
+/* :root {
   font-size: calc(0.5vw + 1vh);
   background: rgb(136, 194, 97);
+} */
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-style: normal;
+  line-height: 1.5;
+  font-size: 1rem;
+  color: #000;
+  background-color: #4c4c4c;
+}
+
+
+
+.container{
+  background-color: #e9e8e6;
+  padding: 20px;
+  margin-top: 20px;
 }
 
 
@@ -29,19 +46,19 @@ p {
   font-family: "Roboto Slab", serif;
 }
 
-a,
+/* a,
 a:link,
 a:active,
 a:visited {
   color: #0066aa;
   text-decoration: none;
   border-bottom: #000013 0.16rem solid;
-}
+} */
 
-a:hover {
+/* a:hover {
   color: #000013;
   border-bottom: #0066aa 0.16rem solid;
-}
+} */
 
 header,
 footer {
@@ -49,13 +66,13 @@ footer {
   text-align: center;
 }
 
-#main_container {
+/* #main_container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   background-color: #4d4a42;
   max-width: 59.5rem;
-}
+} */
 
 .columns {
   display: -webkit-box;
@@ -118,7 +135,7 @@ footer {
   box-shadow:  0 3px 5px rgb(70, 70, 70);
 }
 
-.leftColumn{
+/* .leftColumn{
   max-width: 15rem;
 }
 .middleColumn{
@@ -126,8 +143,8 @@ footer {
 }
 .rightColumn{
   max-width: 15rem;
-}
-.year_box{ 
+} */
+/* .year_box{ 
   float: left;
   width: 33.6rem;
   background: #273823;
@@ -138,7 +155,7 @@ footer {
   float: left;
   width: 11.2rem;
   min-height: 10.4rem;
-}
+} */
 .trimester_box_header{
   font-size: medium;
   background: #864966;
@@ -204,7 +221,7 @@ li {
   font-size: 1.4rem;
   margin: 0.4rem;
   max-height: 2.2rem;
-  min-width: 10.5rem;
+  /* min-width: 10.5rem; */
 }
 /*
 .trimester_box .unit{
@@ -230,10 +247,10 @@ li {
 
 
 /*  ===================  Menu stuff   */
-#infoBoxBox{
+.infoBoxBox{
   background: #acacac;
 }
-.infoBox{
+/* .infoBox{
   height: 9rem;
   border: #000013 0.2rem solid;
   border-radius: .6rem;
@@ -243,15 +260,18 @@ li {
   margin: .6rem 0.1rem;
   background: #acacac;
 
-}
-.studentInfoBox{
+} */
+
+
+/* .studentInfoBox{
   float: left;
   width: 25%;
 }
+
 .unitInfoBox{
   float: left;
   width: 73%;
-}
+}  */
 .infoBox h3 {
   text-align: center;
   line-height: 0;
@@ -259,7 +279,7 @@ li {
 .infoBox h4 {
   font-size: medium;
   line-height: .2;
-}
+} 
 
 
 
@@ -339,3 +359,22 @@ li {
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
   filter: alpha(opacity=20);
 }
+
+nav {
+  height: 75px;
+}
+
+.nav-wrapper{
+  background-color: #7ab800;
+  height: 75px;
+}
+
+nav .brand-logo {
+  position: absolute;
+  color: #fff;
+  display: inline-block;
+  font-size: 2.1rem;
+  padding: 0;
+  text-decoration: none;
+}
+
