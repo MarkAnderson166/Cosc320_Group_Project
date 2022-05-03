@@ -2,7 +2,7 @@
 var dummyData = { 
   "BCOMP" : {
 
-    "Core_1" : [  60,
+    "Core_1" : [  "Core_1", 60,
       { "Code" :  "AMTH140", "CP" : "6", "TriAvail" : "2", "Prereq" : "null", "Name" : "Discrete Mathematics"},
       { "Code" :  "COSC110", "CP" : "6", "TriAvail" : "123", "Prereq" : "null", "Name" : "Introduction to Programming and the UNIX Environment"},
       { "Code" :  "COSC120", "CP" : "6", "TriAvail" : "12", "Prereq" : "null", "Name" : "Object Oriented Programming"},
@@ -14,11 +14,11 @@ var dummyData = {
       { "Code" :  "COSC320", "CP" : "6", "TriAvail" : "12", "Prereq" : "null", "Name" : "Information Technology Project"},
       { "Code" :  "MTHS120", "CP" : "6", "TriAvail" : "12", "Prereq" : "null", "Name" : "Calculus and Linear Algebra 1"},
       ],
-      "Core_2" : [  6,
+      "Core_2" : [  "Core_2", 6,
       { "Code" :  "COSC101", "CP" : "6", "TriAvail" : "2", "Prereq" : "null", "Name" : "Software Development Studio 1"},
       { "Code" :  "COSC102", "CP" : "6", "TriAvail" : "1", "Prereq" : "null", "Name" : "Data Science Studio 1"},
       ],
-      "Core_3" : [  6,
+      "Core_3" : [  "Core_3", 6,
       { "Code" :  "MTHS130", "CP" : "6", "TriAvail" : "23", "Prereq" : "null", "Name" : "Calculus and Linear Algebra 2"},
       { "Code" :  "STAT100", "CP" : "6", "TriAvail" : "23", "Prereq" : "null", "Name" : "Introduction to Statistical Modelling"},
       ],
@@ -26,18 +26,18 @@ var dummyData = {
     //"Major" : {
 
       "SOFTDEV002.5" : {
-        "Prescribed_1" : [  6,
+        "Prescribed_1" : [  "Prescribed_1", 6,
           { "Code" :  "COSC250", "CP" : "6", "TriAvail" : "1", "Prereq" : "null", "Name" : "Programming Paradigms"},
           { "Code" :  "COSC260", "CP" : "6", "TriAvail" : "2", "Prereq" : "null", "Name" : "Web Programming"},
           ],
-        "Prescribed_2" : [  24,
+        "Prescribed_2" : [  "Prescribed_2", 24,
           { "Code" :  "COSC330", "CP" : "6", "TriAvail" : "2", "Prereq" : "null", "Name" : "Parallel and Distributed Computing"},
           { "Code" :  "COSC340", "CP" : "6", "TriAvail" : "1", "Prereq" : "null", "Name" : "Computer Networks and Information Security"},
           { "Code" :  "COSC350", "CP" : "6", "TriAvail" : "2", "Prereq" : "null", "Name" : "Artificial Intelligence"},
           { "Code" :  "COSC360", "CP" : "6", "TriAvail" : "2", "Prereq" : "null", "Name" : "Advanced Web Programming"},
           { "Code" :  "COSC370", "CP" : "6", "TriAvail" : "1", "Prereq" : "null", "Name" : "User Experience and Interaction Design"},
           ],
-        "Listed" : [  30,
+        "Listed" : [  "Listed", 30,
           { "Code" :  "AFM101", "CP" : "6", "TriAvail" : "123", "Prereq" : "null", "Name" : "Introduction to Financial Accounting"},
           { "Code" :  "AFM112", "CP" : "6", "TriAvail" : "123", "Prereq" : "null", "Name" : "Introduction to Management Accounting"},
           { "Code" :  "AFM211", "CP" : "6", "TriAvail" : "123", "Prereq" : "null", "Name" : "Intermediate Financial Accounting"},
@@ -111,18 +111,18 @@ var dummyData = {
           ],
       },
 
-      "DATASC001.1 N Data Science" : {
-        "Prescribed_1" : [  6,
+      "DATASC001.1" : {
+        "Prescribed_1" : [  "Prescribed_1", 6,
           { "Code" :  "COSC250", "CP" : "6", "TriAvail" : "1", "Prereq" : "null", "Name" : "Programming Paradigms"},
           { "Code" :  "STAT210", "CP" : "6", "TriAvail" : "1", "Prereq" : "null", "Name" : "Statistical Modelling and Experimental Design"},
           ],
-          "Prescribed_2" : [  6,
+          "Prescribed_2" : [  "Prescribed_2", 24,
           { "Code" :  "COSC330", "CP" : "6", "TriAvail" : "2", "Prereq" : "null", "Name" : "Parallel and Distributed Computing"},
           { "Code" :  "COSC350", "CP" : "6", "TriAvail" : "2", "Prereq" : "null", "Name" : "Artificial Intelligence"},
           { "Code" :  "COSC380", "CP" : "6", "TriAvail" : "2", "Prereq" : "null", "Name" : "Algorithms in Machine Learning"},
           { "Code" :  "STAT330", "CP" : "6", "TriAvail" : "1", "Prereq" : "null", "Name" : "Statistical Learning"},
           ],
-          "Listed" : [  30,
+          "Listed" : [ "Listed", 30,
           { "Code" :  "BIOL110", "CP" : "6", "TriAvail" : "123", "Prereq" : "null", "Name" : "Biology I"},
           { "Code" :  "BIOL120", "CP" : "6", "TriAvail" : "123", "Prereq" : "null", "Name" : "Biology II"},
           { "Code" :  "GENE210", "CP" : "6", "TriAvail" : "123", "Prereq" : "null", "Name" : "Introductory Genetics"},
@@ -186,7 +186,7 @@ var dummyData = {
           ],
       },
 
-      "Double_Major" : {
+    /*  "Double_Major" : {
         "Prescribed": [ 60,
           { "Code" :  "COSC250", "CP" : "6", "TriAvail" : "1", "Prereq" : "null", "Name" : "Programming Paradigms"},
           { "Code" :  "COSC260", "CP" : "6", "TriAvail" : "2", "Prereq" : "null", "Name" : "Web Programming"},
@@ -200,7 +200,7 @@ var dummyData = {
           { "Code" :  "STAT330", "CP" : "6", "TriAvail" : "1", "Prereq" : "null", "Name" : "Statistical Learning"},
           
         ]
-      },
+      },*/
     //},
   },
   // end bCompSci
@@ -208,7 +208,7 @@ var dummyData = {
   "BN04" : {
 
     "Rule_A_F" : {
-      "Prescribed" : [  144,
+      "Prescribed" : [ "Prescribed", 144,
         { "Code" :  "HHSC111", "CP" : " 6 CP", "TriAvail" : "1", "Prereq" : " null", "Name" : " Science for Nurses 1"},
         { "Code" :  "HHSC112", "CP" : " 6 CP", "TriAvail" : "2", "Prereq" : " null", "Name" : " Science for Nurses 2"},
         { "Code" :  "HLTH101", "CP" : " 6 CP", "TriAvail" : "13", "Prereq" : " null", "Name" : " Information and Evidence in Health and Social Care"},
@@ -234,8 +234,8 @@ var dummyData = {
       ],
     },
 
-    "Rule_B_E" : {
-      "Prescribed" : [  96,
+    "NMBA48" : {  //rule_b+e
+      "Prescribed" : [ "Prescribed", 96, 
         { "Code" :  "HLTH101", "CP" : " 6 CP", "TriAvail" : "13", "Prereq" : " null", "Name" : " Information and Evidence in Health and Social Care"},
         { "Code" :  "HSNS246", "CP" : " 6 CP", "TriAvail" : "12", "Prereq" : " null", "Name" : " Integrated Nursing Practice 5: Primary and Community Health Care"},
         { "Code" :  "HSNS263", "CP" : " 6 CP", "TriAvail" : "13", "Prereq" : " null", "Name" : " Integrated Nursing Practice 1"},
@@ -253,8 +253,8 @@ var dummyData = {
       ],
     },
 
-    "Rule_C" :{
-      "Prescribed" : [  102,
+    "BACHI42" :{  //rule_c
+      "Prescribed" : [ "Prescribed", 102,
         { "Code" :  "HSNS207", "CP" : " 12 CP", "TriAvail" : "23", "Prereq" : " null", "Name" : " Foundations of Nursing in the Australian Context"},
         { "Code" :  "HSNS246", "CP" : " 6 CP", "TriAvail" : "12", "Prereq" : " null", "Name" : " Integrated Nursing Practice 5: Primary and Community Health Care"},
         { "Code" :  "HSNS263", "CP" : " 6 CP", "TriAvail" : "13", "Prereq" : " null", "Name" : " Integrated Nursing Practice 1"},
@@ -272,8 +272,8 @@ var dummyData = {
       ],
     },
 
-    "Rule D": {
-      "Prescribed" : [  108,
+    "ENURS48": {  //rule_d
+      "Prescribed" : [ "Prescribed", 108,
         { "Code" :  "HLTH101", "CP" : " 6 CP", "TriAvail" : "13", "Prereq" : " null", "Name" : " Information and Evidence in Health and Social Care"},
         { "Code" :  "HSNS207", "CP" : " 12 CP", "TriAvail" : "23", "Prereq" : " null", "Name" : " Foundations of Nursing in the Australian Context"},
         { "Code" :  "HSNS246", "CP" : " 6 CP", "TriAvail" : "12", "Prereq" : " null", "Name" : " Integrated Nursing Practice 5: Primary and Community Health Care"},

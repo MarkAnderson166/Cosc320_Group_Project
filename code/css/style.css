@@ -105,7 +105,8 @@ footer {
   text-align: center;
   border: #000013 0.2rem solid;
   border-radius: .6rem;
-    box-shadow: #442626;
+  box-shadow: #442626;
+  font-size: medium;
 
 }
 
@@ -116,14 +117,14 @@ footer {
 .Core_2_unit     { background: #b8ac45; }
 .Core_3_column   { background: #b8ac85;}
 .Core_3_unit     { background: #b8ac85; }
-.Prescribed_Units_1_column{ background: #13a4b9;}
-.Prescribed_Units_1_unit  { background: #13a4b9;}
-.Prescribed_Units_column{ background: #13a4b9;}
-.Prescribed_Units_unit  { background: #13a4b9;}
-.Prescribed_Units_2_column{ background: #13a4ff;}
-.Prescribed_Units_2_unit  { background: #13a4ff;}
-.Listed_Units_column  { background: #97478d;}
-.Listed_Units_unit    { background: #97478d;}
+.Prescribed_1_column{ background: #13a4b9;}
+.Prescribed_1_unit  { background: #13a4b9;}
+.Prescribed_column{ background: #13a4b9;}
+.Prescribed_unit  { background: #13a4b9;}
+.Prescribed_2_column{ background: #13a4ff;}
+.Prescribed_2_unit  { background: #13a4ff;}
+.Listed_column  { background: #97478d;}
+.Listed_unit    { background: #97478d;}
 .elec_column    { background: #15d072;}
 .elec_unit      { background: #15d072;}
 
@@ -218,7 +219,7 @@ li {
   cursor: move;
   text-align: center;
   vertical-align: middle;
-  font-size: 1.4rem;
+  font-size: 1.1rem;
   margin: 0.4rem;
   max-height: 2.2rem;
   /* min-width: 10.5rem; */

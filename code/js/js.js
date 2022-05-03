@@ -1,14 +1,7 @@
 
 var arrForDragula = [ ];
 
-  // dummy values for UI building
-var myDegree = 'bCompSci';
-var myMajor = 'Software_Development';
-var myMajor = 'Data_Science';
-var myMajor = 'Double_Major';
-var myMinor = 'null';
-var startYear = 2022;
-var duration = 4;
+var duration = 6;
 
 
 window.onload = function() {
@@ -23,7 +16,6 @@ window.onload = function() {
 
         // break .csv into 2 arrays
       const headers = (uploaded).slice(0,(uploaded).indexOf("\n")).split(",");
-      console.log(headers)
       var value =  (uploaded).slice((uploaded).indexOf("\n")).split(",");
 
         // combine arrays into a dictionary
@@ -41,16 +33,16 @@ window.onload = function() {
       const studentTotalOptions =     filterUnitsByDegree(studentData, dummyData)
       const studentRemainingOptions = filterUnitsByCompleted(completedUnits, studentTotalOptions)
 
-      printStudentData(studentData, studentRemainingOptions);
 
 
       // make ui
       var startYear = parseInt(studentData['COMMENCEMENT_DT'].substr(-4,4));
       $('#leftColumn').empty()
-      $('.rightColumn').empty()
-      selectDegree('arrName', dummyData);
+      $('#rightColumn').empty()
+      selectDegree(studentRemainingOptions);
       buildYearGrid(startYear, duration);
-      callDragula();
+      fillCompleted(studentData);
+      callDragula(studentTotalOptions);
 
       // anything that happens after file upload has to be called here
 
@@ -75,31 +67,6 @@ function removeNewlines(arr) {
 }
 
 
-    // Just dump our results to the main window
-function printStudentData(studentData, studentRemainingOptions){
-  //console.log(studentData);
-  //console.log(studentData['COURSE_CD']);
-  //console.log(studentData['Completed Units']);
-  $.each(studentData,function (key, value) { 
-    $('#button_container').append(key+': '+value+'<br>')
-  })
-  console.log('studentRemainingOptions = \n');
-  console.log(studentRemainingOptions);
-  $('#button_container').append('<br><br> student recommendations: <br><br>')
-  $.each(studentRemainingOptions,function (key, value) {
-    $.each(value,function (index, unit) { 
-      if (typeof(unit) === 'number' ) {
-        $('#button_container').append('Student '+studentData['STUDENTNUMBER']+
-                      ' needs to complete '+unit+' credit points from: <br>')
-      } else  {
-        $('#button_container').append(unit['Code']+'<br>')
-        //$('#button_container').append(JSON.stringify(unit)+'<br>')
-      }
-    })
-  })
-}
-
-
 
 
 
@@ -116,25 +83,20 @@ function printStudentData(studentData, studentRemainingOptions){
 -------------------------------------------------*/
 
 function filterUnitsByDegree(studentData, dummyData){
-  var arrOfLists = []
 
-    // variantCodes is an array of 'unit blocks'
-    // these are in the 'Unit Sets (Completed)', 'Unit Sets (Non-Completed)',
-    // AND 'Adv Stnd Units', its messy and the array has extra stuff, but it works.
-  var variantCodes = (studentData['Adv Stnd Units']+studentData['Unit Sets (Completed)']+studentData['Unit Sets (Non-Completed)\r'])
-  variantCodes = ((variantCodes.replace(/(['",])/g,' ')).split(' ')).filter(item => item.length > 4 );
-  //console.log(variantCodes)
+  var arrOfLists = []
+  var variantCodes = gatherVariantCodes(studentData);
 
   $.each(dummyData,function (degreeCode, arrOfArrs) { 
     if (degreeCode === studentData['COURSE_CD']){
-      $.each(arrOfArrs,function (index, value) { 
-        if (typeof(value[0]) === 'number' ) {
-          arrOfLists.push(value)         // missing name problem is here
+      $.each(arrOfArrs,function (index, value) {
+        if (typeof(value[1]) === 'number' ) {
+          arrOfLists.push(value)         // picks up core units here
         } else {
           if (variantCodes.includes(index)){
             $.each(value,function (index, value1) { 
-              if (typeof(value1[0]) === 'number' ) {
-                arrOfLists.push(value1)  // missing name problem is here
+              if (typeof(value1[1]) === 'number' ) {
+                arrOfLists.push(value1)  // picks up major/minor units here
               } 
             });
           }
@@ -142,9 +104,9 @@ function filterUnitsByDegree(studentData, dummyData){
       });
     }
   });
-  //console.log(arrOfLists)
   return arrOfLists
 }
+
 
 /* ----------------------------------------------------
   filterUnitsByCompleted()
@@ -163,9 +125,9 @@ function filterUnitsByCompleted(completedUnits, studentTotalOptions){
     var newSubArr = [];
     $.each(list,function (index2, unit) {
       if (completedUnits.includes(unit['Code'])){
-        //console.log('Ive done: '+unit['Code']);
-        newSubArr[0] = parseInt(newSubArr[0])-parseInt(unit['CP'])
+        newSubArr[1] = parseInt(newSubArr[1])-parseInt(unit['CP'])
         completedFilter.push(unit['Code']);
+        unit['CP'] = '0'
       } else{
         newSubArr.push(unit);
       }
@@ -186,7 +148,29 @@ function filterUnitsByCompleted(completedUnits, studentTotalOptions){
 }
 
 
+/* ----------------------------------------------------
+  gatherVariantCodes()
 
+  arg:      dict of student data (from csv) { key:value, key:[val1,val2] }
+  returns:  messy array of 'unit blocks' - eg: majors, minors, pre-existing qualifications [ str,str,str ]
+  side-effect  - null
+------------------------------------------------- */
+
+function gatherVariantCodes(studentData){
+
+  var variantCodes = (studentData['Adv Stnd Units']+
+                      studentData['Unit Sets (Completed)']+
+                      studentData['Unit Sets (Non-Completed)\r']+
+                      studentData['Completed Units'])
+  variantCodes = ((variantCodes.replace(/(['",])/g,' ')).split(' ')).filter(item => item.length > 4 );
+
+  if (studentData['COURSE_CD'] == 'BN04'  && !variantCodes.includes('NMBA48') &&
+        !variantCodes.includes('BACHI42') && !variantCodes.includes('ENURS48')){
+    variantCodes.push('Rule_A_F')  } // 1 hard-coded rule becuase nursing is structured weird.
+  
+  return variantCodes
+
+}
 
 
 
@@ -206,44 +190,70 @@ function filterUnitsByCompleted(completedUnits, studentTotalOptions){
 
 // ------------------- all UI stuff below -------------------
 
-function selectDegree(arrName, arr){
+function selectDegree(arr){
 
-  if (typeof(arr[0]) === 'number' ) {
-    buildUnitList(arrName, arr)
+  if (typeof(arr[1]) === 'number' ) {
+    buildUnitList(arr[0], arr)
 
   } else  {
     $.each(arr,function (index, unitList) { 
-      if (arrName == 'Major' && index !== myMajor) {
-        //console.log('Im not doing the '+ index +' major')
-      }
-      else if (arrName == 'Minor' && index !== myMinor) {
-        //console.log('Im not doing the '+ index +' minor')
-      }
-      else{selectDegree(index, unitList);}
+      selectDegree(unitList);
     });
   }
 }
 
 
+
+function fillCompleted(studentData){
+
+  //STUDENTNUMBER,COURSE_CD,COURSE_TITLE,COURSE_VERSION,COURSE_ATTEMPT_STATUS,MODE,TYPE,ORG_UNIT_CD,
+  //COMMENCEMENT_DT,ENROLLED_CURRENT_TP,ENROLLED_YR,STUDENT_TYPE,CREDIT_POINTS_REQUIRED,ADVANCED STANDING CP,
+  //COMPLETED_CREDIT_POINTS,OUTSTANDING_POINTS,Course Location,Completed Units,Adv Stnd Units,
+  //Unit Sets (Completed),Unit Sets (Non-Completed)
+
+  $('#studentInfoBox').empty()
+  $.each(studentData,function (key, value) { 
+    if(key == 'STUDENTNUMBER' ){
+      $('#studentInfoBox').append(value+'<br>')
+    }
+    if(key == 'CREDIT_POINTS_REQUIRED'  ||  key == 'OUTSTANDING_POINTS' ||
+       key == 'COMPLETED_CREDIT_POINTS' || key == 'Adv Stnd Units'){
+      $('#studentInfoBox').append(key.slice(0,12)+' : '+value+'<br>')
+    }    
+  })
+
+        // this concat is here to ensure the element is an array - ( passing a single str to $.each() is bad mojo)
+  $.each([].concat(studentData['Completed Units']),function (index, unit) { 
+        // this is the html.append for the completed units
+  $('#t'+unit.slice(unit.indexOf('-'))[1]+'y'+
+    unit.slice(unit.indexOf('-')).slice(3,7)).append('<li class="unit hoverable"><p>'+
+    unit.replace('"','').slice(0,unit.indexOf(' '))+'</li>')
+  });
+}
+
+
+
 function buildUnitList(listName, arr){
+
 // make the list
   var col = ''
   if (listName.includes('scri') || listName.includes('isted')) {
-    col = '.rightColumn';
+    col = '#rightColumn';
   } else {
     col = '#leftColumn';
   }
-  $(col).append('<li class="column '+listName+'_column card">'+
+ $(col).append('<li class="column '+listName+'_column card">'+
             '      <div class="column_header">'+
-            '        <h4>10 from this list</h4>'+
+            '        <h4>'+arr[1]+'CP '+arr[0]+':</h4>'+
             '      </div>'+
             '      <ul class="unit_list" id="'+listName+'_unit_list"></ul>'+
             '    </li>')
 
 // put units in the list
-  //console.log(' making list called: '+listName+'  and populating with '+(arr.slice(1)).length+' elements');
+  //console.log('making list called: '+listName+'  and populating with '+(arr.slice(2)).length+' elements'); 
 
-  $.each(arr.slice(1),function (index, unit) { 
+  $.each(arr.slice(2),function (index, unit) { 
+
     $('#'+listName+'_unit_list').append('<li class="unit hoverable '+listName+
                                         '_unit"><p>'+unit['Code']+
                                         '  '+unit['TriAvail']+'</li>')
@@ -261,66 +271,65 @@ function buildYearGrid(startYear, numberOfYears){
     box.remove();
   });
 
-  for (let i = 1; i < numberOfYears+1; i++) {
+  for (let i = 0; i < numberOfYears; i++) {
     $('#middleColumn').append(
       '<div class="year_box row">'+
       '<ul class="trimester_box col l4 m4 s4">'+
       '  <div class="trimester_box_header">Tri 1 '+(startYear+i)+'</div>'+
-      '  <ul class="unit_list" id="t1y'+i+'"></ul>'+
+      '  <ul class="unit_list" id="t1y'+(startYear+i)+'"></ul>'+
       '</ul>'+
       '<ul class="trimester_box col l4 m4 s4">'+
       '  <div class="trimester_box_header">   Tri 2 '+(startYear+i)+'</div>'+
-      '  <ul class="unit_list" id="t2y'+i+'"></ul>'+
+      '  <ul class="unit_list" id="t2y'+(startYear+i)+'"></ul>'+
       '</ul>'+
       '<ul class="trimester_box col l4 m4 s4">'+
       '  <div class="trimester_box_header">   Tri 3 '+(startYear+i)+'</div>'+
-      '  <ul class="unit_list" id="t3y'+i+'"></ul>'+
+      '  <ul class="unit_list" id="t3y'+(startYear+i)+'"></ul>'+
       '</ul>'+
       '</div>'
     )
-    arrForDragula.push(document.getElementById("t1y"+i));
-    arrForDragula.push(document.getElementById("t2y"+i));
-    arrForDragula.push(document.getElementById("t3y"+i));
+    arrForDragula.push(document.getElementById("t1y"+(startYear+i)));
+    arrForDragula.push(document.getElementById("t2y"+(startYear+i)));
+    arrForDragula.push(document.getElementById("t3y"+(startYear+i)));
   }
 }
 
 
-function getUnitDetails(handle){
+function getUnitDetails(handle, studentTotalOptions){
 
   var code = handle.outerHTML.substr(3,7);
   var name = 'Name';
   var TriAvail = 'TriAvail';
   var Prereq = 'Prereq';
 
-  $.each(dummyData['BCOMP'],function (index, arr) { 
+  $.each(studentTotalOptions,function (index, arr) { 
     $.each(arr,function (index, unit) { 
+
       if (unit['Code'] == code ) {
-        name = unit['Name'].substr(0,31);  //long unit names broke my box
+        name = unit['Name'];
         TriAvail = unit['TriAvail'];
         Prereq = unit['Prereq'];
       }
-      if(code.charAt(6) == ' '){
-        name = ' #### 6 digit unit codes break everything! ### '
-      }
+      if(code.charAt(6) == ' '){  name = ' ## 6 digit unit codes break this! ## '      }
     });
   });
   
   $('.unitInfoBox').empty()
-  $('.unitInfoBox').append('<h3>'+code+'</h3><h4>&nbsp;'+name+'</h4><h4> &nbsp;'+
+  $('.unitInfoBox').append('<h4>'+code+'<p></h4><h4>'+name+'</h4><h4> &nbsp;'+
                           'Trimesters:&nbsp; '+TriAvail+'&nbsp;&nbsp;Prereqs: '+Prereq+
                           '</h4><h4>&nbsp; <a href="https://handbook.une.edu.au/units/2022/'+code+'?year=2022" target="_blank">UNE Handbook Entry</a></h4>')
 }
 
 
 
-function callDragula(){
+function callDragula(studentTotalOptions){
 
   dragula(arrForDragula, {
     isContainer: function (el) {
       return false; // only elements in drake.containers will be taken into account
     },
     moves: function (el, source, handle, sibling) {
-      getUnitDetails(handle);
+      getUnitDetails(handle, studentTotalOptions);
       return true; // elements are always draggable by default
     },
     accepts: function (el, target, source, sibling) {
