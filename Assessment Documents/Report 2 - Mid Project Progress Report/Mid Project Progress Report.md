@@ -12,6 +12,10 @@
 ## Summary of the project
 A short one paragraph summary of the project	1
 
+- use the same paragraph that we used in the Scoping Doc? 
+- Might need to check with Eddie
+- maybe it depends on the marks we get for it
+
 ## Overall progress to date
 A statement regarding your overall progress to date	2
 
@@ -32,3 +36,4 @@ Modifications to project plan, if required	1
 
 ## Feedback from client regarding project progress
 Feedback from client regarding project progress	2
+- trying to have organise a meeting and hopefully a demo with the client
