@@ -12,7 +12,7 @@ body {
   line-height: 1.5;
   font-size: 1rem;
   color: #000;
-  background-color: #4c4c4c;
+  background-color: #3d3d3d;
 }
 
 
@@ -85,56 +85,122 @@ footer {
 }
 
 .column {
-  margin: 0.6rem 0.6rem;
-  background: #727171;
+  /* margin: 0.6rem 0.6rem; */
+  /* background: #727171;
   border: #000013 0.2rem solid;
-  border-radius: 0.4rem;
+  border-radius: 0.4rem; */
+  color: white;
+  font-weight: bold;
 }
-.middleColumn .column{
+/* .middleColumn .column{
   width: 23.4%;
   margin: 0.6rem 0.3rem;
-}
+} */
 
 .column_header {
   padding: 0.1rem;
-  margin: -1rem 0.6rem;
+  /* margin: -1rem 0.6rem; */
 
 }
 
 .column_header h4 {
   text-align: center;
-  border: #000013 0.2rem solid;
-  border-radius: .6rem;
-  box-shadow: #442626;
+  /* border: #000013 0.2rem solid; */
+  /* border-radius: .6rem; */
+  /* box-shadow: #442626; */
   font-size: medium;
 
 }
 
 
-.Core_1_column   { background: #be6e2b; }
-.Core_1_unit     { background: #be6e2b; }
-.Core_2_column   { background: #b8ac45;}
-.Core_2_unit     { background: #b8ac45; }
-.Core_3_column   { background: #b8ac85;}
-.Core_3_unit     { background: #b8ac85; }
-.Prescribed_1_column{ background: #13a4b9;}
-.Prescribed_1_unit  { background: #13a4b9;}
-.Prescribed_column{ background: #13a4b9;}
-.Prescribed_unit  { background: #13a4b9;}
-.Prescribed_2_column{ background: #13a4ff;}
-.Prescribed_2_unit  { background: #13a4ff;}
-.Listed_column  { background: #97478d;}
-.Listed_unit    { background: #97478d;}
-.elec_column    { background: #15d072;}
-.elec_unit      { background: #15d072;}
+.Core_1_column {background: #be6e2b;}
+.Core_1_unit {
+  border: #be6e2b 0.1rem solid;
+  border-top: #be6e2b 0.4rem solid
+  }
+.Core_1_unit:hover {
+  background: #be6e2b;
+  color: white;
+  box-shadow:  0 3px 5px rgb(70, 70, 70);
+}
+.Core_2_column {background: #b8ac45;}
+.Core_2_unit {
+  border: #b8ac45 0.1rem solid;
+  border-top: #b8ac45 0.4rem solid
+}
+.Core_2_unit:hover {
+  background: #b8ac45;
+  color: white;
+  box-shadow:  0 3px 5px rgb(70, 70, 70);
+}
+.Core_3_column {background: #b8ac85;}
+.Core_3_unit {
+  border: #b8ac85 0.1rem solid;
+  border-top: #b8ac85 0.4rem solid
+}
+.Core_3_unit:hover {
+  background: #b8ac85;
+  color: white;
+  box-shadow:  0 3px 5px rgb(70, 70, 70);
+}
+.Prescribed_1_column {background: #13a4b9;}
+.Prescribed_1_unit {
+  border: #13a4b9 0.1rem solid;
+  border-top: #13a4b9 0.4rem solid
+}
+.Prescribed_1_unit:hover {
+  background: #13a4b9;
+  color: white;
+  box-shadow:  0 3px 5px rgb(70, 70, 70);
+}
+.Prescribed_column {background: #13a4b9;}
+.Prescribed_unit{
+  border: #13a4b9 0.1rem solid;
+  border-top: #13a4b9 0.4rem solid
+}
+.Prescribed_unit:hover {
+  background: #13a4b9;
+  color: white;
+  box-shadow:  0 3px 5px rgb(70, 70, 70);
+}
+.Prescribed_2_column {background: #13a4ff;}
+.Prescribed_2_unit {
+  border: #13a4ff 0.1rem solid;
+  border-top: #13a4ff 0.4rem solid
+}
+.Prescribed_2_unit:hover {
+  background: #13a4ff;
+  color: white;
+  box-shadow:  0 3px 5px rgb(70, 70, 70);
+}
+.Listed_column {background: #97478d;}
+.Listed_unit {
+  border: #97478d 0.1rem solid;
+  border-top: #97478d 0.4rem solid
+}
+.Listed_unit:hover {
+  background: #97478d;
+  color: white;
+  box-shadow:  0 3px 5px rgb(70, 70, 70);
+}
+.elec_column {background: #15d072;}
+.elec_unit {
+  border: #15d072 0.1rem solid;
+  border-top: #15d072 0.4rem solid
+}
+.elec_unit:hover {
+  background: #15d072;
+  color: white;
+  box-shadow:  0 3px 5px rgb(70, 70, 70);
+}
 
 
-.hoverable:hover {
-  color: #00b86b;
+/* .hoverable:hover {
+  color: white;
   background-color: #442626;
   border-color: #ffffff;
   box-shadow:  0 3px 5px rgb(70, 70, 70);
-}
+} */
 
 /* .leftColumn{
   max-width: 15rem;
@@ -159,15 +225,18 @@ footer {
 } */
 .trimester_box_header{
   font-size: medium;
+  font-weight: bold;
   background: #864966;
-  border-bottom: #000013 0.2rem solid;
+  /* border-bottom: #000013 0.2rem solid; */
   text-align: center;
-  border: #000013 0.2rem solid;
-  border-radius: .6rem;
+  color: white;
+  /* border: #000013 0.2rem solid;
+  border-radius: .6rem; */
 }
 
 .unit_list {
   min-height: 2rem;
+  padding-bottom: 0.6rem;
 }
 
 ul {
@@ -214,8 +283,8 @@ li {
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   height: 4rem;
-  border: #000013 0.15rem solid;
-  border-radius: 0.4rem;
+  /* border: #000013 0.15rem solid;
+  border-radius: 0.4rem; */
   cursor: move;
   text-align: center;
   vertical-align: middle;
@@ -249,7 +318,8 @@ li {
 
 /*  ===================  Menu stuff   */
 .infoBoxBox{
-  background: #acacac;
+  background: #4c4c4c;
+  color: white
 }
 /* .infoBox{
   height: 9rem;

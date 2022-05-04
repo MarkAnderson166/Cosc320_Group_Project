@@ -242,8 +242,8 @@ function buildUnitList(listName, arr){
   } else {
     col = '#leftColumn';
   }
- $(col).append('<li class="column '+listName+'_column card">'+
-            '      <div class="column_header">'+
+ $(col).append('<li class="card">'+
+            '      <div class="column_header column '+listName+'_column">'+
             '        <h4>'+arr[1]+'CP '+arr[0]+':</h4>'+
             '      </div>'+
             '      <ul class="unit_list" id="'+listName+'_unit_list"></ul>'+
@@ -255,8 +255,8 @@ function buildUnitList(listName, arr){
   $.each(arr.slice(2),function (index, unit) { 
 
     $('#'+listName+'_unit_list').append('<li class="unit hoverable '+listName+
-                                        '_unit"><p>'+unit['Code']+
-                                        '  '+unit['TriAvail']+'</li>')
+    '_unit"><p>'+unit['Code']+
+                                        '  '+unit['TriAvail']+'</p></li>')
   });
 
 // add units to 'make-me-draggable' list

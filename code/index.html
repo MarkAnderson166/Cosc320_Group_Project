@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <script>
     window.console = window.console || function(t) {};
@@ -35,12 +36,13 @@
   <!-- Navigation -->
   <nav>
     <div class="nav-wrapper">
+      
       <a href="#" class="brand-logo left">
-        Course Progression
+        <i class="large material-icons">dashboard</i> Course Progression
       </a>
       <ul class="right">
-        <li><a class="modal-trigger" href="#uploadModal">Upload Data</a></li>
-        <li><a href="https://www.une.edu.au/current-students/support/student-support" target="_blank">Support</a></li>
+        <li><a class="modal-trigger" href="#uploadModal">Upload Data<i class="material-icons right">upload_file</i></a></li>
+        <li><a href="https://www.une.edu.au/current-students/support/student-support" target="_blank">Support<i class="material-icons right">contact_support</i></a></li>
       </ul>
     </div>
   </nav>
@@ -54,13 +56,19 @@
         <div class="file-field input-field">
           <div class="btn btn-primary">
             <span>Upload File</span>
+            <i class="material-icons right">upload_file</i>
             <input type="file" id="csvFile" accept=".csv" />
           </div>
           <div class="file-path-wrapper">
             <input class="file-path validate" type="text">
           </div>
         </div>
-        <input type="submit" class="btn btn-primary btn-large" value="Submit" />
+        <!-- <input type="submit" class="btn btn-primary btn-large" value="Submit" /> -->
+        <button class="btn waves-effect waves-light" type="submit" name="action">
+          Submit
+          <i class="material-icons right">send</i>
+        </button>
+        </button>
       </form>
     </div>
   </div>
