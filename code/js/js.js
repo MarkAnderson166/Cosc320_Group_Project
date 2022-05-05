@@ -272,7 +272,7 @@ function buildYearGrid(startYear, numberOfYears) {
     box.remove();
   });
 
-  $('#availableUnits').prepend('<h4>Available Units</h4>')
+  // $('#availableUnits').prepend('<h4>Available Units</h4>')
 
   for (let i = 0; i < numberOfYears; i++) {
     $('#calendar').append(
