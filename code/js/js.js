@@ -33,7 +33,14 @@ window.onload = function () {
       const studentTotalOptions = filterUnitsByDegree(studentData, dummyData)
       const studentRemainingOptions = filterUnitsByCompleted(completedUnits, studentTotalOptions)
 
-
+      console.log('completedUnits')
+      console.log(completedUnits)
+      console.log('studentTotalOptions')
+      console.log(studentTotalOptions)
+      console.log('studentRemainingOptions')
+      console.log(studentRemainingOptions)
+      console.log('gatherVariantCodes(studentData)')
+      console.log(gatherVariantCodes(studentData))
 
       // make ui
       var startYear = parseInt(studentData['COMMENCEMENT_DT'].substr(-4, 4));
@@ -93,7 +100,8 @@ function filterUnitsByDegree(studentData, dummyData) {
         if (typeof (value[1]) === 'number') {
           arrOfLists.push(value)         // picks up core units here
         } else {
-          if (variantCodes.includes(index)) {
+          //if (variantCodes.includes(index.slice(0, index.indexOf('0')+1))) {
+          if (variantCodes.includes(index)){
             $.each(value, function (index, value1) {
               if (typeof (value1[1]) === 'number') {
                 arrOfLists.push(value1)  // picks up major/minor units here
@@ -160,9 +168,18 @@ function gatherVariantCodes(studentData) {
 
   var variantCodes = (studentData['Adv Stnd Units'] +
     studentData['Unit Sets (Completed)'] +
-    studentData['Unit Sets (Non-Completed)\r'] +
+    studentData['Unit Sets (Non-Completed)'] +
     studentData['Completed Units'])
-  variantCodes = ((variantCodes.replace(/(['",])/g, ' ')).split(' ')).filter(item => item.length > 4);
+  variantCodes = ((variantCodes.replace(/(['".,])/g, ' ')).split(' ')).filter(item => item.length > 4);
+/*
+  var variantCodes= []
+  $.each(variantCodes1, function (index, val) {
+    if (val.length > 4) {
+      variantCodes.push(val.slice(0, val.indexOf('0')+1))
+    }
+  })
+*/
+  
 
   if (studentData['COURSE_CD'] == 'BN04' && !variantCodes.includes('NMBA48') &&
     !variantCodes.includes('BACHI42') && !variantCodes.includes('ENURS48')) {

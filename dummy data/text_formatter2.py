@@ -15,9 +15,9 @@
 # bSci
 
 format = '$1, $2, 123, null, $3\n'
-outputFile = open("bNursing.csv","w+")
+outputFile = open("bAminor.csv","w+")
 
-with open('bNursingRaw.csv') as arrayFile:
+with open('bAminorRaw.csv') as arrayFile:
   testsite_array = []
   for line in arrayFile:
     testsite_array.append(line.replace('\n',''))
