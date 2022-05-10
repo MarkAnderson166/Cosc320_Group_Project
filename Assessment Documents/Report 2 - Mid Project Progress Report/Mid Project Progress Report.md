@@ -10,11 +10,7 @@
 * Nicola Howard - nhoward7@myune.edu.au
 
 ## Summary of the project
-A short one paragraph summary of the project	1
-
-- use the same paragraph that we used in the Scoping Doc? 
-- Might need to check with Eddie
-- maybe it depends on the marks we get for it
+ Our project is to develop a working prototype that helps automate the degree completion roadmap process for our client, UNE Student Services. Our prototype will take as input a student’s current course progress in the form of a specifically formatted CSV file and automatically display completed units and allow the student to customise their roadmap with a simple and intuitive drag and drop interface. The completed roadmap will be presented in a visually appealing and easy to understand format. Using our prototype and estimations of time and effort the client can make an informed decision on the feasibility of the project and whether further exploration of the concept is should be pursued.
 
 ## Overall progress to date
 A statement regarding your overall progress to date	2
