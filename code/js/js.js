@@ -101,7 +101,7 @@ function filterUnitsByDegree(studentData, dummyData) {
           arrOfLists.push(value)         // picks up core units here
         } else {
           //if (variantCodes.includes(index.slice(0, index.indexOf('0')+1))) {
-          if (variantCodes.includes(index)){
+          if (variantCodes.includes(index)) {
             $.each(value, function (index, value1) {
               if (typeof (value1[1]) === 'number') {
                 arrOfLists.push(value1)  // picks up major/minor units here
@@ -171,15 +171,15 @@ function gatherVariantCodes(studentData) {
     studentData['Unit Sets (Non-Completed)'] +
     studentData['Completed Units'])
   variantCodes = ((variantCodes.replace(/(['".,])/g, ' ')).split(' ')).filter(item => item.length > 4);
-/*
-  var variantCodes= []
-  $.each(variantCodes1, function (index, val) {
-    if (val.length > 4) {
-      variantCodes.push(val.slice(0, val.indexOf('0')+1))
-    }
-  })
-*/
-  
+  /*
+    var variantCodes= []
+    $.each(variantCodes1, function (index, val) {
+      if (val.length > 4) {
+        variantCodes.push(val.slice(0, val.indexOf('0')+1))
+      }
+    })
+  */
+
 
   if (studentData['COURSE_CD'] == 'BN04' && !variantCodes.includes('NMBA48') &&
     !variantCodes.includes('BACHI42') && !variantCodes.includes('ENURS48')) {
@@ -244,7 +244,7 @@ function fillCompleted(studentData) {
   $.each([].concat(studentData['Completed Units']), function (index, unit) {
     // this is the html.append for the completed units
     $('#t' + unit.slice(unit.indexOf('-'))[1] + 'y' +
-      unit.slice(unit.indexOf('-')).slice(3, 7)).append('<li class="unit hoverable"><p>' +
+      unit.slice(unit.indexOf('-')).slice(3, 7)).append('<li class="unit hoverable completed"><p>' +
         unit.replace('"', '').slice(0, unit.indexOf(' ')) + '</li>')
   });
 }
@@ -350,7 +350,8 @@ function callDragula(studentTotalOptions) {
     },
     moves: function (el, source, handle, sibling) {
       getUnitDetails(handle, studentTotalOptions);
-      return true; // elements are always draggable by default
+
+      return !el.className.includes("completed"); // elements only dragable if not completed
     },
     accepts: function (el, target, source, sibling) {
       return true; // elements can be dropped in any of the `containers` by default
