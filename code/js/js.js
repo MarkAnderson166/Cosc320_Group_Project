@@ -244,7 +244,7 @@ function fillCompleted(studentData) {
   $.each([].concat(studentData['Completed Units']), function (index, unit) {
     // this is the html.append for the completed units
     $('#t' + unit.slice(unit.indexOf('-'))[1] + 'y' +
-      unit.slice(unit.indexOf('-')).slice(3, 7)).append('<li class="unit hoverable completed"><p>' +
+      unit.slice(unit.indexOf('-')).slice(3, 7)).append('<li class="unit completedUnit"><p>' +
         unit.replace('"', '').slice(0, unit.indexOf(' ')) + '</li>')
   });
 }
@@ -351,10 +351,21 @@ function callDragula(studentTotalOptions) {
     moves: function (el, source, handle, sibling) {
       getUnitDetails(handle, studentTotalOptions);
 
-      return !el.className.includes("completed"); // elements only dragable if not completed
+      return !el.className.includes("completedUnit"); // elements only dragable if not completed
     },
     accepts: function (el, target, source, sibling) {
-      return true; // elements can be dropped in any of the `containers` by default
+      // Accepts all elements into trimester lists
+      if ((target.id.includes("t1y") || target.id.includes("t2y") || target.id.includes("t3y")) && !triExpired(target.id)) {
+        return true;
+      }
+
+      // Accepts elements originally from target
+      for (let i = 0; i < el.classList.length; i++) {
+        if (el.classList.item(i).includes("Core")) {
+          return target.id.includes(el.classList.item(i));
+        }
+      }
+      return false
     },
     invalid: function (el, handle) {
       return false; // don't prevent any drags from initiating by default
@@ -369,6 +380,18 @@ function callDragula(studentTotalOptions) {
     slideFactorX: 0,               // allows users to select the amount of movement on the X axis before it is considered a drag instead of a click
     slideFactorY: 0,               // allows users to select the amount of movement on the Y axis before it is considered a drag instead of a click
   });
+}
+
+
+function triExpired(id) {
+  let year = new Date(id.substring(3, 7) + "-03"); // Tri 1 starts in March
+  let tri = id.substring(1, 2);
+  let month = 2629800000; // Milliseconds in a month
+
+  let triEndDate = new Date(year.getTime() + tri * 4 * month);
+
+  return triEndDate < new Date(); // Return triEndDate has already occured
+
 }
 
 

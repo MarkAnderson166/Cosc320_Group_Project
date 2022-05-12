@@ -342,6 +342,10 @@ li {
   /* min-width: 10.5rem; */
 }
 
+.completedUnit {
+  cursor: pointer;
+}
+
 /*
 .trimester_box .unit{
   max-height: 2.2rem;
