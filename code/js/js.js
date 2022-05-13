@@ -48,8 +48,7 @@ window.onload = function () {
       selectDegree(studentRemainingOptions);
       buildYearGrid(startYear, 10);
       fillCompleted(studentData);
-      callDragula(studentTotalOptions);
-
+      drake = callDragula(studentTotalOptions);
       // anything that happens after file upload has to be called here
 
 
@@ -63,15 +62,9 @@ window.onload = function () {
 function removeNewlines(arr) {
   var newArr = [];
   for (var i = 0; i < arr.length; i++)
-    //if (Array.isArray(arr[i])){
     newArr.push(arr[i].replace(/\n/g, ''));
-  //}
-  //else{
-  //  newArr.push(arr[i].replace(/\n/g,''))
-  //}
   return newArr
 }
-
 
 
 
@@ -167,7 +160,7 @@ function gatherVariantCodes(studentData) {
 
   var variantCodes = (studentData['Adv Stnd Units'] +
     studentData['Unit Sets (Completed)'] +
-    studentData['Unit Sets (Non-Completed)'] +
+    studentData['Unit Sets (Non-Completed)\r'] +
     studentData['Completed Units'])
   variantCodes = ((variantCodes.replace(/(['".,])/g, ' ')).split(' ')).filter(item => item.length > 4);
   /*
@@ -277,10 +270,6 @@ function buildUnitList(listName, arr) {
 
   // add units to 'make-me-draggable' list
   arrForDragula.push(document.getElementById(listName + '_unit_list'));
-  console.log(document.querySelector('[id$="_counter"]').innerHTML);
-  var dummy = document.querySelector('[id$="_counter"]').innerHTML;
-  document.querySelector('[id$="_counter"]').innerHTML = (dummy.slice(dummy.indexOf('CP')));
-
 }
 
 
@@ -351,16 +340,18 @@ function callDragula(studentTotalOptions) {
     moves: function (el, source, handle, sibling) {
       getUnitDetails(handle, studentTotalOptions);
       let elclassList = (el.classList + '')
-      let targetid = elclassList.slice(elclassList.indexOf('tri_')+7);
-      let triAvail = elclassList.slice(elclassList.indexOf('tri_')+4,elclassList.indexOf('tri_')+7);
+      let unittype = elclassList.slice(elclassList.indexOf('tri_')+7).trim()+'_list';
+      let triAvail = elclassList.slice(elclassList.indexOf('tri_')+4,elclassList.indexOf('tri_')+8);
 
       for (let i = 0; i < 3; i++) {
-        console.log(' turning lights on ')
+        //console.log('turning lights on ')
         $('.tri_'+triAvail[i]+'_box').each(function() {
           $(this).find('*').addClass('dropable');
+          //console.log(' lighting up:  .tri_'+triAvail[i]+'_box')
         });
+        $('#'+unittype).addClass('dropable');
+        //console.log(' lighting up:  #'+unittype)
       }
-      document.getElementById(targetid.trim()+'_list').classList.add("dropable");
 
       return !el.className.includes("completedUnit"); // elements only dragable if not completed
     },
@@ -369,11 +360,6 @@ function callDragula(studentTotalOptions) {
       // Accepts all elements into trimester lists
       let elclassList = (el.classList + '')
       let triAvail = elclassList.slice(elclassList.indexOf('tri_')+4,elclassList.indexOf('tri_')+7);
-
-      console.log(' turning lights off ')
-      $('.dropable').each(function() {
-        $(this).find('*').addClass('dropable');
-      });
 
       if ((target.id.includes("t"+triAvail[0]+"y") || target.id.includes("t"+triAvail[1]+"y") || target.id.includes("t"+triAvail[2]+"y")) && !triExpired(target.id)) {
         return true;
@@ -403,6 +389,19 @@ function callDragula(studentTotalOptions) {
     ignoreInputTextSelection: true,     // allows users to select input text, see details below
     slideFactorX: 0,               // allows users to select the amount of movement on the X axis before it is considered a drag instead of a click
     slideFactorY: 0,               // allows users to select the amount of movement on the Y axis before it is considered a drag instead of a click
+  })
+  .on('drop', function (el) {
+    $('.dropable').each(function() {
+      $(this).removeClass('dropable');
+    });
+    
+    /* update unit_list counters here
+
+    console.log(document.querySelector('[id$="_counter"]').innerHTML);
+    var dummy = document.querySelector('[id$="_counter"]').innerHTML;
+    document.querySelector('[id$="_counter"]').innerHTML = (dummy.slice(dummy.indexOf('CP')));
+    */
+
   });
 }
 
@@ -417,57 +416,3 @@ function triExpired(id) {
   return triEndDate < new Date(); // Return triEndDate has already occured
 
 }
-
-
-
-
-
-// -----------  xlsx  variation
-/*
-
-  window.onload = function() {
-  
-    button_container.addEventListener("submit", function (e) {
-      e.preventDefault();
-      const input = csvFile.files[0];
-      const reader = new FileReader();
-  
-      reader.onload = function (e) {
-        const uploaded = e.target.result;
-  
-        var workbook = XLSX.read(uploaded, {  type: 'binary'   });
-  
-          var XL_row_object = XLSX.utils.sheet_to_row_object_array(workbook.Sheets['Export Worksheet']);
-          var json_object = JSON.stringify(XL_row_object);
-  
-          printJson(JSON.parse(json_object))
-      };
-  
-      reader.readAsBinaryString(input);
-  
-    //  reader.readAsText(input);
-  
-    });
-  
-    if (skipUpload){
-      $('.leftColumn').empty()
-      $('.rightColumn').empty()
-      selectDegree('arrName', dummyData);
-      buildYearGrid(startYear, duration);
-      callDragula();
-    }
-  }
- 
-  function printJson(json_object){
-  
-    console.log(json_object[2]);
-  
-    myDegree = '<p>(JSON.parse(json_object))[195] :<br>';
-    $.each(json_object[7],function (index, val) { 
-      myDegree = myDegree+index+'&nbsp;'+val.replace(/\r\r/g,'<br>')+'<br>'
-    });
-  
-    $('#button_container').append(myDegree)
-  }
-
-  */
