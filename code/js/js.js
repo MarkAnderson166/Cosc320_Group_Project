@@ -1,8 +1,6 @@
-
 var arrForDragula = [];
 
-var duration = 6;
-
+// var duration = 6;
 
 window.onload = function () {
 
@@ -12,6 +10,7 @@ window.onload = function () {
     const reader = new FileReader();
 
     reader.onload = function (e) {
+      arrForDragula = [];
       const uploaded = e.target.result;
 
       // break .csv into 2 arrays
@@ -47,7 +46,7 @@ window.onload = function () {
       $('#leftColumn').empty()
       $('#rightColumn').empty()
       selectDegree(studentRemainingOptions);
-      buildYearGrid(startYear, duration);
+      buildYearGrid(startYear, 10);
       fillCompleted(studentData);
       callDragula(studentTotalOptions);
 
@@ -262,7 +261,7 @@ function buildUnitList(listName, arr) {
   }
   $(col).append('<li class="card">' +
     '      <div class="column_header column ' + listName + '_column">' +
-    '        <h4>' + arr[1] + 'CP ' + arr[0] + ':</h4>' +
+    '        <h4 id = "'+listName+'_counter">' + arr[1] + 'CP ' + arr[0] + ':</h4>' +
     '      </div>' +
     '      <ul class="unit_list" id="' + listName + '_unit_list"></ul>' +
     '    </li>')
@@ -272,13 +271,16 @@ function buildUnitList(listName, arr) {
 
   $.each(arr.slice(2), function (index, unit) {
 
-    $('#' + listName + '_unit_list').append('<li class="unit hoverable ' + listName +
-      '_unit"><p>' + unit['Code'] +
-      '  ' + unit['TriAvail'] + '</p></li>')
+    $('#' + listName + '_unit_list').append('<li class="unit hoverable tri_'+unit['TriAvail']+'  ' + listName +'_unit"><p>' +
+           unit['Code'] + '  ' + unit['TriAvail'] + '</p></li>')
   });
 
   // add units to 'make-me-draggable' list
   arrForDragula.push(document.getElementById(listName + '_unit_list'));
+  console.log(document.querySelector('[id$="_counter"]').innerHTML);
+  var dummy = document.querySelector('[id$="_counter"]').innerHTML;
+  document.querySelector('[id$="_counter"]').innerHTML = (dummy.slice(dummy.indexOf('CP')));
+
 }
 
 
@@ -289,22 +291,20 @@ function buildYearGrid(startYear, numberOfYears) {
     box.remove();
   });
 
-  // $('#availableUnits').prepend('<h4>Available Units</h4>')
-
   for (let i = 0; i < numberOfYears; i++) {
     $('#calendar').append(
       '<div class="year_box row">' +
-      '<ul class="trimester_box col l4 m4 s4">' +
+      '<ul class="trimester_box tri_1_box col l4 m4 s4">' +
       '  <div class="trimester_box_header">Tri 1 ' + (startYear + i) + '</div>' +
-      '  <ul class="unit_list" id="t1y' + (startYear + i) + '"></ul>' +
+      '  <ul class="unit_list trimester_box " id="t1y' + (startYear + i) + '"></ul>' +
       '</ul>' +
-      '<ul class="trimester_box col l4 m4 s4">' +
+      '<ul class="trimester_box tri_2_box col l4 m4 s4">' +
       '  <div class="trimester_box_header">   Tri 2 ' + (startYear + i) + '</div>' +
-      '  <ul class="unit_list" id="t2y' + (startYear + i) + '"></ul>' +
+      '  <ul class="unit_list trimester_box " id="t2y' + (startYear + i) + '"></ul>' +
       '</ul>' +
-      '<ul class="trimester_box col l4 m4 s4">' +
+      '<ul class="trimester_box tri_3_box col l4 m4 s4">' +
       '  <div class="trimester_box_header">   Tri 3 ' + (startYear + i) + '</div>' +
-      '  <ul class="unit_list" id="t3y' + (startYear + i) + '"></ul>' +
+      '  <ul class="unit_list trimester_box " id="t3y' + (startYear + i) + '"></ul>' +
       '</ul>' +
       '</div>'
     )
@@ -350,13 +350,37 @@ function callDragula(studentTotalOptions) {
     },
     moves: function (el, source, handle, sibling) {
       getUnitDetails(handle, studentTotalOptions);
+      let elclassList = (el.classList + '')
+      let targetid = elclassList.slice(elclassList.indexOf('tri_')+7);
+      let triAvail = elclassList.slice(elclassList.indexOf('tri_')+4,elclassList.indexOf('tri_')+7);
+
+      for (let i = 0; i < 3; i++) {
+        console.log(' turning lights on ')
+        $('.tri_'+triAvail[i]+'_box').each(function() {
+          $(this).find('*').addClass('dropable');
+        });
+      }
+      document.getElementById(targetid.trim()+'_list').classList.add("dropable");
 
       return !el.className.includes("completedUnit"); // elements only dragable if not completed
     },
     accepts: function (el, target, source, sibling) {
+
       // Accepts all elements into trimester lists
-      if ((target.id.includes("t1y") || target.id.includes("t2y") || target.id.includes("t3y")) && !triExpired(target.id)) {
+      let elclassList = (el.classList + '')
+      let triAvail = elclassList.slice(elclassList.indexOf('tri_')+4,elclassList.indexOf('tri_')+7);
+
+      console.log(' turning lights off ')
+      $('.dropable').each(function() {
+        $(this).find('*').addClass('dropable');
+      });
+
+      if ((target.id.includes("t"+triAvail[0]+"y") || target.id.includes("t"+triAvail[1]+"y") || target.id.includes("t"+triAvail[2]+"y")) && !triExpired(target.id)) {
         return true;
+      }
+
+      if (elclassList.includes(target.id.slice(0,-5))){
+        return true
       }
 
       // Accepts elements originally from target

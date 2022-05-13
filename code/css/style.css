@@ -283,8 +283,16 @@ footer {
 }
 
 .unit_list {
-  min-height: 2rem;
+  min-height: 3rem;
   padding-bottom: 0.6rem;
+}
+
+.trimester_box {
+  max-height: 9rem;
+}
+
+.dropable {
+  background-color: #2ed1eb;
 }
 
 ul {
