@@ -11,27 +11,13 @@ window.onload = function () {
 
     reader.onload = function (e) {
       arrForDragula = [];
-      const uploaded = e.target.result;
 
-      // break .csv into 2 arrays
-      const headers = (uploaded).slice(0, (uploaded).indexOf("\n")).split(",");
-      var value = (uploaded).slice((uploaded).indexOf("\n")).split(",");
-
-      // combine arrays into a dictionary
-      value = removeNewlines(value);
-      var studentData = {};
-      for (var i = 0; i < headers.length; i++) {
-        if (value[i].includes('\r')) {
-          studentData[headers[i]] = (value[i].split("\r"));
-        } else {
-          studentData[headers[i]] = value[i];
-        }
-      }
+      const studentData = handleUpload(e.target.result);
 
       const completedUnits = ((studentData['Completed Units'] + studentData['Adv Stnd Units']).replace(/(['",])/g, ' ')).split(' ')
       const studentTotalOptions = filterUnitsByDegree(studentData, dummyData)
       const studentRemainingOptions = filterUnitsByCompleted(completedUnits, studentTotalOptions)
-
+/*
       console.log('completedUnits')
       console.log(completedUnits)
       console.log('studentTotalOptions')
@@ -40,7 +26,7 @@ window.onload = function () {
       console.log(studentRemainingOptions)
       console.log('gatherVariantCodes(studentData)')
       console.log(gatherVariantCodes(studentData))
-
+*/
       // make ui
       var startYear = parseInt(studentData['COMMENCEMENT_DT'].substr(-4, 4));
       $('#leftColumn').empty()
@@ -58,6 +44,27 @@ window.onload = function () {
 }
 
 
+function handleUpload(uploaded){
+
+  // break .csv into 2 arrays and clean them up
+  const headers = (uploaded).slice(0, (uploaded).indexOf("\n")).split(",");
+  var value = (uploaded).slice((uploaded).indexOf("\n")).split(",");
+  var cleanValues = [];
+  for (var i = 0; i < value.length; i++){
+    cleanValues.push(value[i].replace(/\n/g, ''));
+  }
+
+  // combine arrays into a dictionary
+  var studentData = {};
+  for (var i = 0; i < headers.length; i++) {
+    if (cleanValues[i].includes('\r')) {
+      studentData[headers[i]] = (cleanValues[i].split("\r"));
+    } else {
+      studentData[headers[i]] = cleanValues[i];
+    }
+  }
+  return studentData
+}
 // I will need to make this recursive later. (probably)
 function removeNewlines(arr) {
   var newArr = [];
@@ -65,6 +72,12 @@ function removeNewlines(arr) {
     newArr.push(arr[i].replace(/\n/g, ''));
   return newArr
 }
+
+
+
+
+
+
 
 
 
@@ -92,7 +105,6 @@ function filterUnitsByDegree(studentData, dummyData) {
         if (typeof (value[1]) === 'number') {
           arrOfLists.push(value)         // picks up core units here
         } else {
-          //if (variantCodes.includes(index.slice(0, index.indexOf('0')+1))) {
           if (variantCodes.includes(index)) {
             $.each(value, function (index, value1) {
               if (typeof (value1[1]) === 'number') {
@@ -160,17 +172,9 @@ function gatherVariantCodes(studentData) {
 
   var variantCodes = (studentData['Adv Stnd Units'] +
     studentData['Unit Sets (Completed)'] +
-    studentData['Unit Sets (Non-Completed)\r'] +
+    studentData['Unit Sets (Non-Completed)\r'] +  // careful with this \r - breaks lots of stuff
     studentData['Completed Units'])
   variantCodes = ((variantCodes.replace(/(['".,])/g, ' ')).split(' ')).filter(item => item.length > 4);
-  /*
-    var variantCodes= []
-    $.each(variantCodes1, function (index, val) {
-      if (val.length > 4) {
-        variantCodes.push(val.slice(0, val.indexOf('0')+1))
-      }
-    })
-  */
 
 
   if (studentData['COURSE_CD'] == 'BN04' && !variantCodes.includes('NMBA48') &&
@@ -260,17 +264,65 @@ function buildUnitList(listName, arr) {
     '    </li>')
 
   // put units in the list
-  //console.log('making list called: '+listName+'  and populating with '+(arr.slice(2)).length+' elements'); 
 
   $.each(arr.slice(2), function (index, unit) {
 
-    $('#' + listName + '_unit_list').append('<li class="unit hoverable tri_'+unit['TriAvail']+'  ' + listName +'_unit"><p>' +
-           unit['Code'] + '  ' + unit['TriAvail'] + '</p></li>')
+    $('#' + listName + '_unit_list').append('<li class="unit hoverable tri_'+unit['TriAvail']+
+          '  ' + listName +'_unit"><p>' +unit['Code'] + '  ' + unit['TriAvail'] + '</p></li>')
   });
 
   // add units to 'make-me-draggable' list
   arrForDragula.push(document.getElementById(listName + '_unit_list'));
 }
+
+
+
+function updateListCounters(el){           //  called everytime something is droped 
+  let list = el.classList+'';
+  let unittype = list.slice(list.indexOf('tri_')+7).trim()+'_list';
+  unittype = unittype.slice(0,unittype.indexOf(' '));
+
+  let listOfLists = document.querySelectorAll('[id*="_unit_list"]')
+
+  var curretCp = 0;
+  var counterString = ''
+  var idTagSelc = ''
+  listOfLists.forEach(list => {
+    if ( list.id.slice(0,list.id.indexOf('_list')) == unittype ){
+
+      if ( true ){ // taken from list
+
+        idTagSelc = list.id.slice(0,list.id.indexOf('_unit'))+'_counter'
+        counterString = $('#'+idTagSelc).html();
+        curretCp = parseInt(counterString.slice(0, counterString.indexOf('CP')))-6;
+        label = counterString.slice(counterString.indexOf('CP'));
+        $('#'+idTagSelc).html(curretCp+label);
+      }
+      else { // put back into list 
+
+        idTagSelc = list.id.slice(0,list.id.indexOf('_unit'))+'_counter'
+        counterString = $('#'+idTagSelc).html();
+        curretCp = parseInt(counterString.slice(0, counterString.indexOf('CP')))+6;
+        label = counterString.slice(counterString.indexOf('CP'));
+        $('#'+idTagSelc).html(curretCp+label);
+      }
+    }
+  });
+}
+
+
+function highlightDropOptions(list){     //  called everytime something is droped 
+  let unittype = list.slice(list.indexOf('tri_')+7).trim()+'_list';
+  let triAvail = list.slice(list.indexOf('tri_')+4,list.indexOf('tri_')+8);
+
+  for (let i = 0; i < 3; i++) {
+    $('.tri_'+triAvail[i]+'_box').each(function() {
+      $(this).find('*').addClass('dropable');
+    });
+    $('#'+unittype).addClass('dropable');
+  }
+}
+
 
 
 function buildYearGrid(startYear, numberOfYears) {
@@ -331,6 +383,19 @@ function getUnitDetails(handle, studentTotalOptions) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+// -------    Dragula Library stuff ----------------
+
 function callDragula(studentTotalOptions) {
 
   dragula(arrForDragula, {
@@ -338,20 +403,9 @@ function callDragula(studentTotalOptions) {
       return false; // only elements in drake.containers will be taken into account
     },
     moves: function (el, source, handle, sibling) {
-      getUnitDetails(handle, studentTotalOptions);
-      let elclassList = (el.classList + '')
-      let unittype = elclassList.slice(elclassList.indexOf('tri_')+7).trim()+'_list';
-      let triAvail = elclassList.slice(elclassList.indexOf('tri_')+4,elclassList.indexOf('tri_')+8);
 
-      for (let i = 0; i < 3; i++) {
-        //console.log('turning lights on ')
-        $('.tri_'+triAvail[i]+'_box').each(function() {
-          $(this).find('*').addClass('dropable');
-          //console.log(' lighting up:  .tri_'+triAvail[i]+'_box')
-        });
-        $('#'+unittype).addClass('dropable');
-        //console.log(' lighting up:  #'+unittype)
-      }
+      getUnitDetails(handle, studentTotalOptions);
+      highlightDropOptions(el.classList+'');
 
       return !el.className.includes("completedUnit"); // elements only dragable if not completed
     },
@@ -390,17 +444,13 @@ function callDragula(studentTotalOptions) {
     slideFactorX: 0,               // allows users to select the amount of movement on the X axis before it is considered a drag instead of a click
     slideFactorY: 0,               // allows users to select the amount of movement on the Y axis before it is considered a drag instead of a click
   })
+
   .on('drop', function (el) {
     $('.dropable').each(function() {
       $(this).removeClass('dropable');
     });
     
-    /* update unit_list counters here
-
-    console.log(document.querySelector('[id$="_counter"]').innerHTML);
-    var dummy = document.querySelector('[id$="_counter"]').innerHTML;
-    document.querySelector('[id$="_counter"]').innerHTML = (dummy.slice(dummy.indexOf('CP')));
-    */
+    updateListCounters(el);
 
   });
 }
