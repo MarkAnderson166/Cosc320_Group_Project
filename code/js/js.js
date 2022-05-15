@@ -264,7 +264,6 @@ function buildUnitList(listName, arr) {
     '    </li>')
 
   // put units in the list
-
   $.each(arr.slice(2), function (index, unit) {
 
     $('#' + listName + '_unit_list').append('<li class="unit hoverable tri_'+unit['TriAvail']+
@@ -277,47 +276,43 @@ function buildUnitList(listName, arr) {
 
 
 
-function updateListCounters(el){           //  called everytime something is droped 
+function updateListCounters(el, target, source){    //  called everytime something is droped 
   let list = el.classList+'';
   let unittype = list.slice(list.indexOf('tri_')+7).trim()+'_list';
   unittype = unittype.slice(0,unittype.indexOf(' '));
 
   let listOfLists = document.querySelectorAll('[id*="_unit_list"]')
 
-  var curretCp = 0;
-  var counterString = ''
-  var idTagSelc = ''
   listOfLists.forEach(list => {
     if ( list.id.slice(0,list.id.indexOf('_list')) == unittype ){
 
-      if ( true ){ // taken from list
+      var idTagSelc = list.id.slice(0,list.id.indexOf('_unit'))+'_counter'
+      var counterString = $('#'+idTagSelc).html();
+      var curretCp = parseInt(counterString.slice(0, counterString.indexOf('CP')));
+      label = counterString.slice(counterString.indexOf('CP'));
 
-        idTagSelc = list.id.slice(0,list.id.indexOf('_unit'))+'_counter'
-        counterString = $('#'+idTagSelc).html();
-        curretCp = parseInt(counterString.slice(0, counterString.indexOf('CP')))-6;
-        label = counterString.slice(counterString.indexOf('CP'));
-        $('#'+idTagSelc).html(curretCp+label);
+      if ( source.id.includes(unittype) && !target.id.includes(unittype) ){ // unit taken from origin list
+        $('#'+idTagSelc).html((curretCp-6)+label);
       }
-      else { // put back into list 
-
-        idTagSelc = list.id.slice(0,list.id.indexOf('_unit'))+'_counter'
-        counterString = $('#'+idTagSelc).html();
-        curretCp = parseInt(counterString.slice(0, counterString.indexOf('CP')))+6;
-        label = counterString.slice(counterString.indexOf('CP'));
-        $('#'+idTagSelc).html(curretCp+label);
+      else if ( target.id.includes(unittype) && !source.id.includes(unittype) ) { // unit put back into origin list 
+        $('#'+idTagSelc).html((curretCp+6)+label);
       }
     }
   });
 }
 
 
-function highlightDropOptions(list){     //  called everytime something is droped 
+
+function highlightDropOptions(list){     //  called everytime something is draged 
   let unittype = list.slice(list.indexOf('tri_')+7).trim()+'_list';
   let triAvail = list.slice(list.indexOf('tri_')+4,list.indexOf('tri_')+8);
 
   for (let i = 0; i < 3; i++) {
     $('.tri_'+triAvail[i]+'_box').each(function() {
-      $(this).find('*').addClass('dropable');
+      let triId =(this.outerHTML).slice(this.outerHTML.indexOf('id="')+4,this.outerHTML.indexOf('id="')+11);
+      if (!triExpired(triId)){
+        $(this).find('.unit_list').addClass('dropable');
+      }
     });
     $('#'+unittype).addClass('dropable');
   }
@@ -354,6 +349,7 @@ function buildYearGrid(startYear, numberOfYears) {
     arrForDragula.push(document.getElementById("t3y" + (startYear + i)));
   }
 }
+
 
 
 function getUnitDetails(handle, studentTotalOptions) {
@@ -445,14 +441,15 @@ function callDragula(studentTotalOptions) {
     slideFactorY: 0,               // allows users to select the amount of movement on the Y axis before it is considered a drag instead of a click
   })
 
-  .on('drop', function (el) {
-    $('.dropable').each(function() {
-      $(this).removeClass('dropable');
-    });
-    
-    updateListCounters(el);
-
-  });
+  .on('drop', function (el, target, source) {
+    updateListCounters(el,target,source);
+    //setTimeout(() => {
+      $('.dropable').each(function() {
+        $(this).removeClass('dropable');
+      });
+    //}, 500);
+  })
+  //.on('drag', function (el,handle) {    highlightDropOptions(el.classList+'');  });
 }
 
 
