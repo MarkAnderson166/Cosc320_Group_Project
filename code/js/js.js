@@ -267,7 +267,7 @@ function buildUnitList(listName, arr) {
   $.each(arr.slice(2), function (index, unit) {
 
     $('#' + listName + '_unit_list').append('<li class="unit hoverable tri_'+unit['TriAvail']+
-          '  ' + listName +'_unit"><p>' +unit['Code'] + '  ' + unit['TriAvail'] + '</p></li>')
+          '  ' + listName +'_unit cp_' +unit['CP'] +' "><p>' +unit['Code'] +'</p></li>')// '  ' + unit['TriAvail'] + '</p></li>')
   });
 
   // add units to 'make-me-draggable' list
@@ -277,9 +277,11 @@ function buildUnitList(listName, arr) {
 
 
 function updateListCounters(el, target, source){    //  called everytime something is droped 
+
   let list = el.classList+'';
   let unittype = list.slice(list.indexOf('tri_')+7).trim()+'_list';
   unittype = unittype.slice(0,unittype.indexOf(' '));
+  let cpValue = parseInt(list.slice(list.indexOf('cp_')+3,list.indexOf('cp_')+5));
 
   let listOfLists = document.querySelectorAll('[id*="_unit_list"]')
 
@@ -292,10 +294,10 @@ function updateListCounters(el, target, source){    //  called everytime somethi
       label = counterString.slice(counterString.indexOf('CP'));
 
       if ( source.id.includes(unittype) && !target.id.includes(unittype) ){ // unit taken from origin list
-        $('#'+idTagSelc).html((curretCp-6)+label);
+        $('#'+idTagSelc).html((curretCp-cpValue)+label);
       }
       else if ( target.id.includes(unittype) && !source.id.includes(unittype) ) { // unit put back into origin list 
-        $('#'+idTagSelc).html((curretCp+6)+label);
+        $('#'+idTagSelc).html((curretCp+cpValue)+label);
       }
     }
   });
@@ -443,11 +445,9 @@ function callDragula(studentTotalOptions) {
 
   .on('drop', function (el, target, source) {
     updateListCounters(el,target,source);
-    //setTimeout(() => {
-      $('.dropable').each(function() {
-        $(this).removeClass('dropable');
-      });
-    //}, 500);
+    $('.dropable').each(function() {
+      $(this).removeClass('dropable');
+    });
   })
   //.on('drag', function (el,handle) {    highlightDropOptions(el.classList+'');  });
 }
