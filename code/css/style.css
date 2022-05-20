@@ -379,8 +379,12 @@ li {
 
 /*  ===================  Menu stuff   */
 .infoBoxBox {
-  background: #4c4c4c;
-  color: white
+  padding: 8px 48px;
+  font-size: large;
+}
+
+h2 {
+  color: #7d5177;
 }
 
 /* .infoBox{
@@ -412,7 +416,6 @@ li {
 
 .infoBox h4 {
   font-size: medium;
-  line-height: .2;
 }
 
 
@@ -515,4 +518,22 @@ nav .brand-logo {
   font-size: 2.1rem;
   padding: 0;
   text-decoration: none;
+}
+
+
+.infoBox a:link {
+  text-decoration: none;
+  color: #7ab800;
+}
+
+.infoBox a:visited {
+  text-decoration: none;
+}
+
+.infoBox a:hover {
+  text-decoration: underline;
+}
+
+.infoBox a:active {
+  text-decoration: underline;
 }

@@ -17,16 +17,16 @@ window.onload = function () {
       const completedUnits = ((studentData['Completed Units'] + studentData['Adv Stnd Units']).replace(/(['",])/g, ' ')).split(' ')
       const studentTotalOptions = filterUnitsByDegree(studentData, dummyData)
       const studentRemainingOptions = filterUnitsByCompleted(completedUnits, studentTotalOptions)
-/*
-      console.log('completedUnits')
-      console.log(completedUnits)
-      console.log('studentTotalOptions')
-      console.log(studentTotalOptions)
-      console.log('studentRemainingOptions')
-      console.log(studentRemainingOptions)
-      console.log('gatherVariantCodes(studentData)')
-      console.log(gatherVariantCodes(studentData))
-*/
+      /*
+            console.log('completedUnits')
+            console.log(completedUnits)
+            console.log('studentTotalOptions')
+            console.log(studentTotalOptions)
+            console.log('studentRemainingOptions')
+            console.log(studentRemainingOptions)
+            console.log('gatherVariantCodes(studentData)')
+            console.log(gatherVariantCodes(studentData))
+      */
       // make ui
       var startYear = parseInt(studentData['COMMENCEMENT_DT'].substr(-4, 4));
       $('#leftColumn').empty()
@@ -37,20 +37,19 @@ window.onload = function () {
       drake = callDragula(studentTotalOptions);
       // anything that happens after file upload has to be called here
 
-
     };
     reader.readAsText(input);
   });
 }
 
 
-function handleUpload(uploaded){
+function handleUpload(uploaded) {
 
   // break .csv into 2 arrays and clean them up
   const headers = (uploaded).slice(0, (uploaded).indexOf("\n")).split(",");
   var value = (uploaded).slice((uploaded).indexOf("\n")).split(",");
   var cleanValues = [];
-  for (var i = 0; i < value.length; i++){
+  for (var i = 0; i < value.length; i++) {
     cleanValues.push(value[i].replace(/\n/g, ''));
   }
 
@@ -226,15 +225,31 @@ function fillCompleted(studentData) {
   //Unit Sets (Completed),Unit Sets (Non-Completed)
 
   $('#studentInfoBox').empty()
+  var completedCP = 0;
+  var requiredCP = 0;
+  $('#studentInfoBox').append('<h3>Course Progress</h3><br>')
   $.each(studentData, function (key, value) {
     if (key == 'STUDENTNUMBER') {
-      $('#studentInfoBox').append(value + '<br>')
+      $('#studentInfoBox').append('Course: ' + value + '<br>')
     }
-    if (key == 'CREDIT_POINTS_REQUIRED' || key == 'OUTSTANDING_POINTS' ||
-      key == 'COMPLETED_CREDIT_POINTS' || key == 'Adv Stnd Units') {
-      $('#studentInfoBox').append(key.slice(0, 12) + ' : ' + value + '<br>')
+    value == "" ? value = "0" : null;
+    switch (key) {
+      case 'CREDIT_POINTS_REQUIRED': {
+        requiredCP = Number(value);
+        break;
+      }
+      case 'COMPLETED_CREDIT_POINTS' || 'Adv Stnd Units': {
+        completedCP += Number(value);
+        break;
+      }
+
     }
   })
+
+  $('#studentInfoBox').append('Require: ' + requiredCP + 'cp<br>')
+  $('#studentInfoBox').append('Completed: ' + completedCP + 'cp<br>')
+  let percentComplete = (completedCP / requiredCP) * 100;
+  $('#studentInfoBox').append('<div class="w3-border"><div class="w3-green w3-center" style="height:24px;width:' + percentComplete + '%">' + percentComplete + '%</div></div><br>')
 
   // this concat is here to ensure the element is an array - ( passing a single str to $.each() is bad mojo)
   $.each([].concat(studentData['Completed Units']), function (index, unit) {
@@ -258,7 +273,7 @@ function buildUnitList(listName, arr) {
   }
   $(col).append('<li class="card">' +
     '      <div class="column_header column ' + listName + '_column">' +
-    '        <h4 id = "'+listName+'_counter">' + arr[1] + 'CP ' + arr[0] + ':</h4>' +
+    '        <h4 id = "' + listName + '_counter">' + arr[1] + 'CP ' + arr[0] + ':</h4>' +
     '      </div>' +
     '      <ul class="unit_list" id="' + listName + '_unit_list"></ul>' +
     '    </li>')
@@ -266,8 +281,8 @@ function buildUnitList(listName, arr) {
   // put units in the list
   $.each(arr.slice(2), function (index, unit) {
 
-    $('#' + listName + '_unit_list').append('<li class="unit hoverable tri_'+unit['TriAvail']+
-          '  ' + listName +'_unit cp_' +unit['CP'] +' "><p>' +unit['Code'] +'</p></li>')// '  ' + unit['TriAvail'] + '</p></li>')
+    $('#' + listName + '_unit_list').append('<li class="unit hoverable tri_' + unit['TriAvail'] +
+      '  ' + listName + '_unit cp_' + unit['CP'] + ' "><p>' + unit['Code'] + '</p></li>')// '  ' + unit['TriAvail'] + '</p></li>')
   });
 
   // add units to 'make-me-draggable' list
@@ -276,28 +291,28 @@ function buildUnitList(listName, arr) {
 
 
 
-function updateListCounters(el, target, source){    //  called everytime something is droped 
+function updateListCounters(el, target, source) {    //  called everytime something is droped 
 
-  let list = el.classList+'';
-  let unittype = list.slice(list.indexOf('tri_')+7).trim()+'_list';
-  unittype = unittype.slice(0,unittype.indexOf(' '));
-  let cpValue = parseInt(list.slice(list.indexOf('cp_')+3,list.indexOf('cp_')+5));
+  let list = el.classList + '';
+  let unittype = list.slice(list.indexOf('tri_') + 7).trim() + '_list';
+  unittype = unittype.slice(0, unittype.indexOf(' '));
+  let cpValue = parseInt(list.slice(list.indexOf('cp_') + 3, list.indexOf('cp_') + 5));
 
   let listOfLists = document.querySelectorAll('[id*="_unit_list"]')
 
   listOfLists.forEach(list => {
-    if ( list.id.slice(0,list.id.indexOf('_list')) == unittype ){
+    if (list.id.slice(0, list.id.indexOf('_list')) == unittype) {
 
-      var idTagSelc = list.id.slice(0,list.id.indexOf('_unit'))+'_counter'
-      var counterString = $('#'+idTagSelc).html();
+      var idTagSelc = list.id.slice(0, list.id.indexOf('_unit')) + '_counter'
+      var counterString = $('#' + idTagSelc).html();
       var curretCp = parseInt(counterString.slice(0, counterString.indexOf('CP')));
       label = counterString.slice(counterString.indexOf('CP'));
 
-      if ( source.id.includes(unittype) && !target.id.includes(unittype) ){ // unit taken from origin list
-        $('#'+idTagSelc).html((curretCp-cpValue)+label);
+      if (source.id.includes(unittype) && !target.id.includes(unittype)) { // unit taken from origin list
+        $('#' + idTagSelc).html((curretCp - cpValue) + label);
       }
-      else if ( target.id.includes(unittype) && !source.id.includes(unittype) ) { // unit put back into origin list 
-        $('#'+idTagSelc).html((curretCp+cpValue)+label);
+      else if (target.id.includes(unittype) && !source.id.includes(unittype)) { // unit put back into origin list 
+        $('#' + idTagSelc).html((curretCp + cpValue) + label);
       }
     }
   });
@@ -305,18 +320,18 @@ function updateListCounters(el, target, source){    //  called everytime somethi
 
 
 
-function highlightDropOptions(list){     //  called everytime something is draged 
-  let unittype = list.slice(list.indexOf('tri_')+7).trim()+'_list';
-  let triAvail = list.slice(list.indexOf('tri_')+4,list.indexOf('tri_')+8);
+function highlightDropOptions(list) {     //  called everytime something is draged 
+  let unittype = list.slice(list.indexOf('tri_') + 7).trim() + '_list';
+  let triAvail = list.slice(list.indexOf('tri_') + 4, list.indexOf('tri_') + 8);
 
   for (let i = 0; i < 3; i++) {
-    $('.tri_'+triAvail[i]+'_box').each(function() {
-      let triId =(this.outerHTML).slice(this.outerHTML.indexOf('id="')+4,this.outerHTML.indexOf('id="')+11);
-      if (!triExpired(triId)){
+    $('.tri_' + triAvail[i] + '_box').each(function () {
+      let triId = (this.outerHTML).slice(this.outerHTML.indexOf('id="') + 4, this.outerHTML.indexOf('id="') + 11);
+      if (!triExpired(triId)) {
         $(this).find('.unit_list').addClass('dropable');
       }
     });
-    $('#'+unittype).addClass('dropable');
+    $('#' + unittype).addClass('dropable');
   }
 }
 
@@ -356,7 +371,7 @@ function buildYearGrid(startYear, numberOfYears) {
 
 function getUnitDetails(handle, studentTotalOptions) {
 
-  var code = handle.outerHTML.substr(3, 7);
+  var code = handle.firstChild.outerHTML.substr(3, 7);
   var name = 'Name';
   var TriAvail = 'TriAvail';
   var Prereq = 'Prereq';
@@ -374,9 +389,11 @@ function getUnitDetails(handle, studentTotalOptions) {
   });
 
   $('.unitInfoBox').empty()
-  $('.unitInfoBox').append('<h4>' + code + '<p></h4><h4>' + name + '</h4><h4> &nbsp;' +
-    'Trimesters:&nbsp; ' + TriAvail + '&nbsp;&nbsp;Prereqs: ' + Prereq +
-    '</h4><h4>&nbsp; <a href="https://handbook.une.edu.au/units/2022/' + code + '?year=2022" target="_blank">UNE Handbook Entry</a></h4>')
+  $('.unitInfoBox').append('<h3>' + code + ' Information</h3><br>');
+  $('.unitInfoBox').append('Name: ' + name +
+    '<br>Run in Trimester(s): ' + TriAvail +
+    '<br>Prereqs: ' + Prereq +
+    '<br><a href="https://handbook.une.edu.au/units/2022/' + code + '?year=2022" target="_blank">More Info...</a>')
 }
 
 
@@ -401,9 +418,8 @@ function callDragula(studentTotalOptions) {
       return false; // only elements in drake.containers will be taken into account
     },
     moves: function (el, source, handle, sibling) {
-
-      getUnitDetails(handle, studentTotalOptions);
-      highlightDropOptions(el.classList+'');
+      getUnitDetails(el, studentTotalOptions);
+      highlightDropOptions(el.classList + '');
 
       return !el.className.includes("completedUnit"); // elements only dragable if not completed
     },
@@ -411,13 +427,13 @@ function callDragula(studentTotalOptions) {
 
       // Accepts all elements into trimester lists
       let elclassList = (el.classList + '')
-      let triAvail = elclassList.slice(elclassList.indexOf('tri_')+4,elclassList.indexOf('tri_')+7);
+      let triAvail = elclassList.slice(elclassList.indexOf('tri_') + 4, elclassList.indexOf('tri_') + 7);
 
-      if ((target.id.includes("t"+triAvail[0]+"y") || target.id.includes("t"+triAvail[1]+"y") || target.id.includes("t"+triAvail[2]+"y")) && !triExpired(target.id)) {
+      if ((target.id.includes("t" + triAvail[0] + "y") || target.id.includes("t" + triAvail[1] + "y") || target.id.includes("t" + triAvail[2] + "y")) && !triExpired(target.id)) {
         return true;
       }
 
-      if (elclassList.includes(target.id.slice(0,-5))){
+      if (elclassList.includes(target.id.slice(0, -5))) {
         return true
       }
 
@@ -443,12 +459,12 @@ function callDragula(studentTotalOptions) {
     slideFactorY: 0,               // allows users to select the amount of movement on the Y axis before it is considered a drag instead of a click
   })
 
-  .on('drop', function (el, target, source) {
-    updateListCounters(el,target,source);
-    $('.dropable').each(function() {
-      $(this).removeClass('dropable');
-    });
-  })
+    .on('drop', function (el, target, source) {
+      updateListCounters(el, target, source);
+      $('.dropable').each(function () {
+        $(this).removeClass('dropable');
+      });
+    })
   //.on('drag', function (el,handle) {    highlightDropOptions(el.classList+'');  });
 }
 
