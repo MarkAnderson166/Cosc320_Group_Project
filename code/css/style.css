@@ -291,6 +291,10 @@ footer {
   max-height: 12rem;
 }
 
+.expiredTri {
+  background-color: #c7c2c2;
+}
+
 .dropable {
   background-color: #57e29c;
 }

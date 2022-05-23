@@ -266,7 +266,7 @@ function buildUnitList(listName, arr) {
 
   // make the list
   var col = ''
-  if (listName.includes('scri') || listName.includes('isted')) {
+  if ( ( listName.includes('scri') || listName.includes('isted') ) && $("#leftColumn").find('.unit_list').length > 0) {
     col = '#rightColumn';
   } else {
     col = '#leftColumn';
@@ -321,7 +321,12 @@ function updateListCounters(el, target, source) {    //  called everytime someth
 
 
 function highlightDropOptions(list) {     //  called everytime something is draged 
-  let unittype = list.slice(list.indexOf('tri_') + 7).trim() + '_list';
+
+  $('.dropable').each(function () {
+    $(this).removeClass('dropable');
+  });
+
+  let unittype = list.slice(list.indexOf('tri_') + 7, list.indexOf('unit_') + 5).trim() + '_list';
   let triAvail = list.slice(list.indexOf('tri_') + 4, list.indexOf('tri_') + 8);
 
   for (let i = 0; i < 3; i++) {
@@ -343,21 +348,22 @@ function buildYearGrid(startYear, numberOfYears) {
   boxes.forEach(box => {
     box.remove();
   });
-
+  let isExp = ''
   for (let i = 0; i < numberOfYears; i++) {
+    if ( startYear+i < 2022 ){ isExp = 'expiredTri'} else { isExp = '' }
     $('#calendar').append(
       '<div class="year_box row">' +
       '<ul class="trimester_box tri_1_box col l4 m4 s4">' +
       '  <div class="trimester_box_header">Tri 1 ' + (startYear + i) + '</div>' +
-      '  <ul class="unit_list trimester_box " id="t1y' + (startYear + i) + '"></ul>' +
+      '  <ul class="unit_list trimester_box '+isExp+'" id="t1y' + (startYear + i) + '"></ul>' +
       '</ul>' +
       '<ul class="trimester_box tri_2_box col l4 m4 s4">' +
       '  <div class="trimester_box_header">   Tri 2 ' + (startYear + i) + '</div>' +
-      '  <ul class="unit_list trimester_box " id="t2y' + (startYear + i) + '"></ul>' +
+      '  <ul class="unit_list trimester_box '+isExp+'" id="t2y' + (startYear + i) + '"></ul>' +
       '</ul>' +
       '<ul class="trimester_box tri_3_box col l4 m4 s4">' +
       '  <div class="trimester_box_header">   Tri 3 ' + (startYear + i) + '</div>' +
-      '  <ul class="unit_list trimester_box " id="t3y' + (startYear + i) + '"></ul>' +
+      '  <ul class="unit_list trimester_box '+isExp+'" id="t3y' + (startYear + i) + '"></ul>' +
       '</ul>' +
       '</div>'
     )
