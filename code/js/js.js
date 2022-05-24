@@ -271,7 +271,6 @@ function fillCompleted(studentData) {
   });
 
   padWithElectives(requiredCP-completedCP)
-
 }
 
 
@@ -340,17 +339,15 @@ function updateListCounters(el, target, source) {    //  called everytime someth
       var counterString = $('#' + idTagSelc).html();
       var curretCp = parseInt(counterString.slice(0, counterString.indexOf('CP')));
       label = counterString.slice(counterString.indexOf('CP'));
-
-      if (source.id.includes(unittype) && !target.id.includes(unittype)) { // unit taken from origin list
+      if (source.includes(unittype) && !target.includes(unittype)) { // unit taken from origin list
         $('#' + idTagSelc).html((curretCp - cpValue) + label);
       }
-      else if (target.id.includes(unittype) && !source.id.includes(unittype)) { // unit put back into origin list 
+      else if (target.includes(unittype) && !source.includes(unittype)) { // unit put back into origin list 
         $('#' + idTagSelc).html((curretCp + cpValue) + label);
       }
     }
   });
 }
-
 
 
 function highlightDropOptions(list) {     //  called everytime something is draged 
@@ -436,11 +433,26 @@ function getUnitDetails(handle, studentTotalOptions) {
 }
 
 
+function resetDrags(){
+
+  $('.unit').each(function () {
+    let classes = this.classList+''
+    let unit_type = classes.slice(classes.indexOf('tri_')+7, classes.indexOf('_unit')).trim();
+
+      if (classes.includes("hover") && !$(this).parent().attr('id').includes(unit_type) ) {
+        $(this).detach().appendTo('#'+ unit_type +'_unit_list')
+        updateListCounters(this, ('#'+ unit_type +'_unit_list'), ('#t2y2022'))
+            // #t2y2022 is a dummy value, the magic for the counters is the !$(this)
+      }
+  });
+}
 
 
 
-
-
+function autoFill(){
+  console.log('autoFill()')
+  jQuery("#NodesToMove").detach().appendTo('#DestinationContainerNode')
+}
 
 
 
@@ -499,7 +511,7 @@ function callDragula(studentTotalOptions) {
   })
 
     .on('drop', function (el, target, source) {
-      updateListCounters(el, target, source);
+      updateListCounters(el, target.id, source.id);
       $('.dropable').each(function () {
         $(this).removeClass('dropable');
       });
