@@ -227,16 +227,16 @@ footer {
   box-shadow: 0 3px 5px rgb(70, 70, 70);
 }
 
-.elec_column {
+.elective_column {
   background: #15d072;
 }
 
-.elec_unit {
+.elective_unit {
   border: #15d072 0.1rem solid;
   border-top: #15d072 0.4rem solid
 }
 
-.elec_unit:hover {
+.elective_unit:hover {
   background: #15d072;
   color: white;
   box-shadow: 0 3px 5px rgb(70, 70, 70);

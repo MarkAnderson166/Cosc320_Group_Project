@@ -185,6 +185,23 @@ var dummyData = {
           { "Code" :  "STAT320", "CP" : "6", "TriAvail" : "123", "Prereq" : "null", "Name" : "Advanced Statistical Modelling"},
           ],
       },
+
+      "DOUBLE" : {
+        "Prescribed_1" : [  "Prescribed_1", 18,
+          { "Code" :  "COSC250", "CP" : "6", "TriAvail" : "1", "Prereq" : "null", "Name" : "Programming Paradigms"},
+          { "Code" :  "COSC260", "CP" : "6", "TriAvail" : "2", "Prereq" : "null", "Name" : "Web Programming"},
+          { "Code" :  "STAT210", "CP" : "6", "TriAvail" : "1", "Prereq" : "null", "Name" : "Statistical Modelling and Experimental Design"},
+          ],
+          "Prescribed_2" : [  "Prescribed_2", 42,
+          { "Code" :  "COSC330", "CP" : "6", "TriAvail" : "2", "Prereq" : "null", "Name" : "Parallel and Distributed Computing"},
+          { "Code" :  "COSC340", "CP" : "6", "TriAvail" : "1", "Prereq" : "null", "Name" : "Computer Networks and Information Security"},
+          { "Code" :  "COSC350", "CP" : "6", "TriAvail" : "2", "Prereq" : "null", "Name" : "Artificial Intelligence"},
+          { "Code" :  "COSC360", "CP" : "6", "TriAvail" : "2", "Prereq" : "null", "Name" : "Advanced Web Programming"},
+          { "Code" :  "COSC370", "CP" : "6", "TriAvail" : "1", "Prereq" : "null", "Name" : "User Experience and Interaction Design"},
+          { "Code" :  "COSC380", "CP" : "6", "TriAvail" : "2", "Prereq" : "null", "Name" : "Algorithms in Machine Learning"},
+          { "Code" :  "STAT330", "CP" : "6", "TriAvail" : "1", "Prereq" : "null", "Name" : "Statistical Learning"},
+          ],
+      },
     },
     // end bCompSci
 

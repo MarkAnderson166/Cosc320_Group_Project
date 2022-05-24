@@ -1,5 +1,6 @@
 var arrForDragula = [];
-
+    // this is a global because the func that adds it up is recursive
+let cpCountforElecPad = 0 
 // var duration = 6;
 
 window.onload = function () {
@@ -10,13 +11,17 @@ window.onload = function () {
     const reader = new FileReader();
 
     reader.onload = function (e) {
+      
+        // clear globals on re-load
       arrForDragula = [];
+      cpCountforElecPad = 0
 
       const studentData = handleUpload(e.target.result);
 
       const completedUnits = ((studentData['Completed Units'] + studentData['Adv Stnd Units']).replace(/(['",])/g, ' ')).split(' ')
       const studentTotalOptions = filterUnitsByDegree(studentData, dummyData)
       const studentRemainingOptions = filterUnitsByCompleted(completedUnits, studentTotalOptions)
+      
       /*
             console.log('completedUnits')
             console.log(completedUnits)
@@ -181,6 +186,13 @@ function gatherVariantCodes(studentData) {
     variantCodes.push('Rule_A_F')
   } // 1 hard-coded rule becuase nursing is structured weird.
 
+  if (studentData['COURSE_CD'] == 'BCOMP' &&
+    variantCodes.includes('SOFTDEV002') && variantCodes.includes('DATASC001')) {
+  variantCodes.push('DOUBLE')
+  variantCodes = variantCodes.filter(item => item !== 'SOFTDEV002')
+  variantCodes = variantCodes.filter(item => item !== 'DATASC001')
+} // hard-coded rule for bcomp double, because doing it properly would be hard #shame
+
   return variantCodes
 
 }
@@ -204,10 +216,9 @@ function gatherVariantCodes(studentData) {
 // ------------------- all UI stuff below -------------------
 
 function selectDegree(arr) {
-
   if (typeof (arr[1]) === 'number') {
     buildUnitList(arr[0], arr)
-
+    cpCountforElecPad += arr[1]
   } else {
     $.each(arr, function (index, unitList) {
       selectDegree(unitList);
@@ -258,6 +269,28 @@ function fillCompleted(studentData) {
       unit.slice(unit.indexOf('-')).slice(3, 7)).append('<li class="unit completedUnit"><p>' +
         unit.replace('"', '').slice(0, unit.indexOf(' ')) + '</li>')
   });
+
+  padWithElectives(requiredCP-completedCP)
+
+}
+
+
+
+function padWithElectives(requiredCP){
+
+  let numberOfElectives = requiredCP-cpCountforElecPad
+  if (numberOfElectives > 0){
+    $('#leftColumn').append('<li class="card">' +
+      '      <div class="column_header column elective_column">' +
+      '        <h4 id = "elective_counter">' + String(requiredCP-cpCountforElecPad) + 'CP Others:</h4>' +
+      '      </div>' +
+      '      <ul class="unit_list" id="elective_unit_list"></ul>' +
+      '    </li>')
+    for (let i = 1; i < (numberOfElectives/6)+1; i++) {
+      $('#elective_unit_list').append('<li class="unit hoverable tri_123 elective_unit cp_6 "><p> Elec/Maj/Min </p></li>')
+    }
+    arrForDragula.push(document.getElementById('elective_unit_list'));
+  }
 }
 
 
