@@ -22,16 +22,6 @@ window.onload = function () {
       const studentTotalOptions = filterUnitsByDegree(studentData, dummyData)
       const studentRemainingOptions = filterUnitsByCompleted(completedUnits, studentTotalOptions)
       
-      /*
-            console.log('completedUnits')
-            console.log(completedUnits)
-            console.log('studentTotalOptions')
-            console.log(studentTotalOptions)
-            console.log('studentRemainingOptions')
-            console.log(studentRemainingOptions)
-            console.log('gatherVariantCodes(studentData)')
-            console.log(gatherVariantCodes(studentData))
-      */
       // make ui
       var startYear = parseInt(studentData['COMMENCEMENT_DT'].substr(-4, 4));
       $('#leftColumn').empty()
@@ -286,7 +276,7 @@ function padWithElectives(requiredCP){
       '      <ul class="unit_list" id="elective_unit_list"></ul>' +
       '    </li>')
     for (let i = 1; i < (numberOfElectives/6)+1; i++) {
-      $('#elective_unit_list').append('<li class="unit hoverable tri_123 elective_unit cp_6 "><p> Elec/Maj/Min </p></li>')
+      $('#elective_unit_list').append('<li id="elective'+i+'" class=" unit hoverable tri_123 elective_unit cp_6 "><p> Elec/Maj/Min </p></li>')
     }
     arrForDragula.push(document.getElementById('elective_unit_list'));
   }
@@ -313,8 +303,8 @@ function buildUnitList(listName, arr) {
   // put units in the list
   $.each(arr.slice(2), function (index, unit) {
 
-    $('#' + listName + '_unit_list').append('<li class="unit hoverable tri_' + unit['TriAvail'] +
-      '  ' + listName + '_unit cp_' + unit['CP'] + ' "><p>' + unit['Code'] + '</p></li>')// '  ' + unit['TriAvail'] + '</p></li>')
+    $('#' + listName + '_unit_list').append('<li id="' + unit['Code'] + '" class="unit hoverable tri_' + unit['TriAvail'] +
+      '  ' + listName + '_unit cp_' + unit['CP'] + ' "><p>' + unit['Code'] + '</p></li>')
   });
 
   // add units to 'make-me-draggable' list
@@ -449,9 +439,45 @@ function resetDrags(){
 
 
 
-function autoFill(){
-  console.log('autoFill()')
-  jQuery("#NodesToMove").detach().appendTo('#DestinationContainerNode')
+function autoFill(unitsPerTri){
+
+  dumbList = []
+  $('.unit').each(function () {
+    dumbList.push(this)
+  })
+  // build list
+  // sort list
+  // track 100's
+  // track 300's
+  // get/track totalRequired cp
+
+
+  $('.trimester_box .unit_list').each(function () {
+
+    if (!triExpired(this.id)) {  // need to add a 'not in-progress' to this
+      for (let i = 0; i < unitsPerTri; i++) {
+        if (i == 0 && (this.id+'')[1] == '3') { i += 1 } // do less units in tri3
+
+        if (dumbList.length > 0){
+
+          for ( let j = 0; j < dumbList.length; j++){
+
+            let cl = dumbList[j].classList+''
+            let unitTris = cl.slice(cl.indexOf('tri_')+4,cl.indexOf('tri_')+7) 
+  
+            if ( unitTris.includes( (this.id+'')[1] ) ){
+              $('#'+ dumbList[j].id).detach().appendTo('#'+ this.id)
+              updateListCounters(dumbList[j], '#'+this.id, '#'+ dumbList[j].classList[3]+'_list')
+              dumbList.splice(j, 1);
+              j = dumbList.length
+            }
+
+          }
+
+        }
+      }
+    }
+  });
 }
 
 
