@@ -346,7 +346,7 @@ function highlightDropOptions(list) {     //  called everytime something is drag
     $(this).removeClass('dropable');
   });
 
-  let unittype = list.slice(list.indexOf('tri_') + 7, list.indexOf('unit_') + 5).trim() + '_list';
+  let unittype = list.slice(list.indexOf('tri_') + 7, list.indexOf('_unit') + 5).trim() + '_list';
   let triAvail = list.slice(list.indexOf('tri_') + 4, list.indexOf('tri_') + 8);
 
   for (let i = 0; i < 3; i++) {
@@ -356,8 +356,8 @@ function highlightDropOptions(list) {     //  called everytime something is drag
         $(this).find('.unit_list').addClass('dropable');
       }
     });
-    $('#' + unittype).addClass('dropable');
   }
+  $('#' + unittype).addClass('dropable');
 }
 
 
@@ -398,9 +398,9 @@ function buildYearGrid(startYear, numberOfYears) {
 function getUnitDetails(handle, studentTotalOptions) {
 
   var code = handle.firstChild.outerHTML.substr(3, 7);
-  var name = 'Name';
-  var TriAvail = 'TriAvail';
-  var Prereq = 'Prereq';
+  var name = 'data incomplete, check handbook';
+  var TriAvail = 'data incomplete';
+  var Prereq = 'data incomplete, check handbook';
 
   $.each(studentTotalOptions, function (index, arr) {
     $.each(arr, function (index, unit) {
@@ -408,9 +408,21 @@ function getUnitDetails(handle, studentTotalOptions) {
       if (unit['Code'] == code) {
         name = unit['Name'];
         TriAvail = unit['TriAvail'];
-        Prereq = unit['Prereq'];
+        //Prereq = unit['Prereq'];
       }
-      if (code.charAt(6) == ' ') { name = ' ## 6 digit unit codes break this! ## ' }
+      switch (TriAvail) {
+        case '12' || '23' || '13': {
+          TriAvail = TriAvail[0]+' and '+TriAvail[1];
+          break;
+        }
+        case '123' || 'Adv Stnd Units': {
+          TriAvail = TriAvail[0]+', '+TriAvail[1]+' and '+TriAvail[2]+'*';
+          break;
+        }
+      }
+      if (TriAvail.length > 1 )
+      code = code.replace('<', '')
+      code = code.trim() 
     });
   });
 
@@ -419,7 +431,7 @@ function getUnitDetails(handle, studentTotalOptions) {
   $('.unitInfoBox').append('Name: ' + name +
     '<br>Run in Trimester(s): ' + TriAvail +
     '<br>Prereqs: ' + Prereq +
-    '<br><a href="https://handbook.une.edu.au/units/2022/' + code + '?year=2022" target="_blank">More Info...</a>')
+    '<br><a href="https://handbook.une.edu.au/units/2022/' + code + '?year=2022" target="_blank">'+code+' Handbook Entry</a>')
 }
 
 

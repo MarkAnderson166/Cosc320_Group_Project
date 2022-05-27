@@ -227,6 +227,51 @@ footer {
   box-shadow: 0 3px 5px rgb(70, 70, 70);
 }
 
+.Listed_1_column {
+  background: #97478d;
+}
+
+.Listed_1_unit {
+  border: #97478d 0.1rem solid;
+  border-top: #97478d 0.4rem solid
+}
+
+.Listed_1_unit:hover {
+  background: #97478d;
+  color: white;
+  box-shadow: 0 3px 5px rgb(70, 70, 70);
+}
+
+.Listed_2_column {
+  background: #97478d;
+}
+
+.Listed_2_unit {
+  border: #97478d 0.1rem solid;
+  border-top: #97478d 0.4rem solid
+}
+
+.Listed_2_unit:hover {
+  background: #97478d;
+  color: white;
+  box-shadow: 0 3px 5px rgb(70, 70, 70);
+}
+
+.Listed_3_column {
+  background: #97478d;
+}
+
+.Listed_3_unit {
+  border: #97478d 0.1rem solid;
+  border-top: #97478d 0.4rem solid
+}
+
+.Listed_3_unit:hover {
+  background: #97478d;
+  color: white;
+  box-shadow: 0 3px 5px rgb(70, 70, 70);
+}
+
 .elective_column {
   background: #15d072;
 }
@@ -421,8 +466,6 @@ h2 {
 .infoBox h4 {
   font-size: medium;
 }
-
-
 
 
 /* Dropdown Button */
