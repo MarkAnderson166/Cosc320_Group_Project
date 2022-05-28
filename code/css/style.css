@@ -78,8 +78,9 @@ footer {
   float: right;
 }
 
-#availableUnits h4 {
+#availableUnitsText {
   margin: 20px;
+  text-align: center;
 }
 
 .columns {
@@ -550,12 +551,12 @@ h2 {
 }
 
 nav {
-  height: 75px;
+  height: 70px;
 }
 
 .nav-wrapper {
   background-color: #7ab800;
-  height: 75px;
+  height: 70px;
 }
 
 nav .brand-logo {
@@ -564,6 +565,7 @@ nav .brand-logo {
   display: inline-block;
   font-size: 2.1rem;
   padding: 0;
+  margin-left: 20px;
   text-decoration: none;
 }
 

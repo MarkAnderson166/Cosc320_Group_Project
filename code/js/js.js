@@ -1,6 +1,6 @@
 var arrForDragula = [];
-    // this is a global because the func that adds it up is recursive
-let cpCountforElecPad = 0 
+// this is a global because the func that adds it up is recursive
+let cpCountforElecPad = 0
 // var duration = 6;
 
 window.onload = function () {
@@ -9,10 +9,12 @@ window.onload = function () {
     e.preventDefault();
     const input = csvFile.files[0];
     const reader = new FileReader();
+    const name = document.getElementById('name-input').value;
+    setName(name);
 
     reader.onload = function (e) {
-      
-        // clear globals on re-load
+
+      // clear globals on re-load
       arrForDragula = [];
       cpCountforElecPad = 0
 
@@ -21,7 +23,7 @@ window.onload = function () {
       const completedUnits = ((studentData['Completed Units'] + studentData['Adv Stnd Units']).replace(/(['",])/g, ' ')).split(' ')
       const studentTotalOptions = filterUnitsByDegree(studentData, dummyData)
       const studentRemainingOptions = filterUnitsByCompleted(completedUnits, studentTotalOptions)
-      
+
       // make ui
       var startYear = parseInt(studentData['COMMENCEMENT_DT'].substr(-4, 4));
       $('#leftColumn').empty()
@@ -35,6 +37,8 @@ window.onload = function () {
     };
     reader.readAsText(input);
   });
+  // Open the modal on page load
+  M.Modal.getInstance($('.modal')).open();
 }
 
 
@@ -178,10 +182,10 @@ function gatherVariantCodes(studentData) {
 
   if (studentData['COURSE_CD'] == 'BCOMP' &&
     variantCodes.includes('SOFTDEV002') && variantCodes.includes('DATASC001')) {
-  variantCodes.push('DOUBLE')
-  variantCodes = variantCodes.filter(item => item !== 'SOFTDEV002')
-  variantCodes = variantCodes.filter(item => item !== 'DATASC001')
-} // hard-coded rule for bcomp double, because doing it properly would be hard #shame
+    variantCodes.push('DOUBLE')
+    variantCodes = variantCodes.filter(item => item !== 'SOFTDEV002')
+    variantCodes = variantCodes.filter(item => item !== 'DATASC001')
+  } // hard-coded rule for bcomp double, because doing it properly would be hard #shame
 
   return variantCodes
 
@@ -260,23 +264,23 @@ function fillCompleted(studentData) {
         unit.replace('"', '').slice(0, unit.indexOf(' ')) + '</li>')
   });
 
-  padWithElectives(requiredCP-completedCP)
+  padWithElectives(requiredCP - completedCP)
 }
 
 
 
-function padWithElectives(requiredCP){
+function padWithElectives(requiredCP) {
 
-  let numberOfElectives = requiredCP-cpCountforElecPad
-  if (numberOfElectives > 0){
+  let numberOfElectives = requiredCP - cpCountforElecPad
+  if (numberOfElectives > 0) {
     $('#leftColumn').append('<li class="card">' +
       '      <div class="column_header column elective_column">' +
-      '        <h4 id = "elective_counter">' + String(requiredCP-cpCountforElecPad) + 'CP Others:</h4>' +
+      '        <h4 id = "elective_counter">' + String(requiredCP - cpCountforElecPad) + 'CP Others:</h4>' +
       '      </div>' +
       '      <ul class="unit_list" id="elective_unit_list"></ul>' +
       '    </li>')
-    for (let i = 1; i < (numberOfElectives/6)+1; i++) {
-      $('#elective_unit_list').append('<li id="elective'+i+'" class=" unit hoverable tri_123 elective_unit cp_6 "><p> Elec/Maj/Min </p></li>')
+    for (let i = 1; i < (numberOfElectives / 6) + 1; i++) {
+      $('#elective_unit_list').append('<li id="elective' + i + '" class=" unit hoverable tri_123 elective_unit cp_6 "><p> Elec/Maj/Min </p></li>')
     }
     arrForDragula.push(document.getElementById('elective_unit_list'));
   }
@@ -288,7 +292,7 @@ function buildUnitList(listName, arr) {
 
   // make the list
   var col = ''
-  if ( ( listName.includes('scri') || listName.includes('isted') ) && $("#leftColumn").find('.unit_list').length > 0) {
+  if ((listName.includes('scri') || listName.includes('isted')) && $("#leftColumn").find('.unit_list').length > 0) {
     col = '#rightColumn';
   } else {
     col = '#leftColumn';
@@ -370,20 +374,20 @@ function buildYearGrid(startYear, numberOfYears) {
   });
   let isExp = ''
   for (let i = 0; i < numberOfYears; i++) {
-    if ( startYear+i < 2022 ){ isExp = 'expiredTri'} else { isExp = '' }
+    if (startYear + i < 2022) { isExp = 'expiredTri' } else { isExp = '' }
     $('#calendar').append(
       '<div class="year_box row">' +
       '<ul class="trimester_box tri_1_box col l4 m4 s4">' +
       '  <div class="trimester_box_header">Tri 1 ' + (startYear + i) + '</div>' +
-      '  <ul class="unit_list trimester_box '+isExp+'" id="t1y' + (startYear + i) + '"></ul>' +
+      '  <ul class="unit_list trimester_box ' + isExp + '" id="t1y' + (startYear + i) + '"></ul>' +
       '</ul>' +
       '<ul class="trimester_box tri_2_box col l4 m4 s4">' +
       '  <div class="trimester_box_header">   Tri 2 ' + (startYear + i) + '</div>' +
-      '  <ul class="unit_list trimester_box '+isExp+'" id="t2y' + (startYear + i) + '"></ul>' +
+      '  <ul class="unit_list trimester_box ' + isExp + '" id="t2y' + (startYear + i) + '"></ul>' +
       '</ul>' +
       '<ul class="trimester_box tri_3_box col l4 m4 s4">' +
       '  <div class="trimester_box_header">   Tri 3 ' + (startYear + i) + '</div>' +
-      '  <ul class="unit_list trimester_box '+isExp+'" id="t3y' + (startYear + i) + '"></ul>' +
+      '  <ul class="unit_list trimester_box ' + isExp + '" id="t3y' + (startYear + i) + '"></ul>' +
       '</ul>' +
       '</div>'
     )
@@ -412,17 +416,17 @@ function getUnitDetails(handle, studentTotalOptions) {
       }
       switch (TriAvail) {
         case '12' || '23' || '13': {
-          TriAvail = TriAvail[0]+' and '+TriAvail[1];
+          TriAvail = TriAvail[0] + ' and ' + TriAvail[1];
           break;
         }
         case '123' || 'Adv Stnd Units': {
-          TriAvail = TriAvail[0]+', '+TriAvail[1]+' and '+TriAvail[2]+'*';
+          TriAvail = TriAvail[0] + ', ' + TriAvail[1] + ' and ' + TriAvail[2] + '*';
           break;
         }
       }
-      if (TriAvail.length > 1 )
-      code = code.replace('<', '')
-      code = code.trim() 
+      if (TriAvail.length > 1)
+        code = code.replace('<', '')
+      code = code.trim()
     });
   });
 
@@ -431,27 +435,27 @@ function getUnitDetails(handle, studentTotalOptions) {
   $('.unitInfoBox').append('Name: ' + name +
     '<br>Run in Trimester(s): ' + TriAvail +
     '<br>Prereqs: ' + Prereq +
-    '<br><a href="https://handbook.une.edu.au/units/2022/' + code + '?year=2022" target="_blank">'+code+' Handbook Entry</a>')
+    '<br><a href="https://handbook.une.edu.au/units/2022/' + code + '?year=2022" target="_blank">' + code + ' Handbook Entry</a>')
 }
 
 
-function resetDrags(){
+function resetDrags() {
 
   $('.unit').each(function () {
-    let classes = this.classList+''
-    let unit_type = classes.slice(classes.indexOf('tri_')+7, classes.indexOf('_unit')).trim();
+    let classes = this.classList + ''
+    let unit_type = classes.slice(classes.indexOf('tri_') + 7, classes.indexOf('_unit')).trim();
 
-      if (classes.includes("hover") && !$(this).parent().attr('id').includes(unit_type) ) {
-        $(this).detach().appendTo('#'+ unit_type +'_unit_list')
-        updateListCounters(this, ('#'+ unit_type +'_unit_list'), ('#t2y2022'))
-            // #t2y2022 is a dummy value, the magic for the counters is the !$(this)
-      }
+    if (classes.includes("hover") && !$(this).parent().attr('id').includes(unit_type)) {
+      $(this).detach().appendTo('#' + unit_type + '_unit_list')
+      updateListCounters(this, ('#' + unit_type + '_unit_list'), ('#t2y2022'))
+      // #t2y2022 is a dummy value, the magic for the counters is the !$(this)
+    }
   });
 }
 
 
 
-function autoFill(unitsPerTri){
+function autoFill(unitsPerTri) {
 
   dumbList = []
   $('.unit').each(function () {
@@ -468,18 +472,18 @@ function autoFill(unitsPerTri){
 
     if (!triExpired(this.id)) {  // need to add a 'not in-progress' to this
       for (let i = 0; i < unitsPerTri; i++) {
-        if (i == 0 && (this.id+'')[1] == '3') { i += 1 } // do less units in tri3
+        if (i == 0 && (this.id + '')[1] == '3') { i += 1 } // do less units in tri3
 
-        if (dumbList.length > 0){
+        if (dumbList.length > 0) {
 
-          for ( let j = 0; j < dumbList.length; j++){
+          for (let j = 0; j < dumbList.length; j++) {
 
-            let cl = dumbList[j].classList+''
-            let unitTris = cl.slice(cl.indexOf('tri_')+4,cl.indexOf('tri_')+7) 
-  
-            if ( unitTris.includes( (this.id+'')[1] ) ){
-              $('#'+ dumbList[j].id).detach().appendTo('#'+ this.id)
-              updateListCounters(dumbList[j], '#'+this.id, '#'+ dumbList[j].classList[3]+'_list')
+            let cl = dumbList[j].classList + ''
+            let unitTris = cl.slice(cl.indexOf('tri_') + 4, cl.indexOf('tri_') + 7)
+
+            if (unitTris.includes((this.id + '')[1])) {
+              $('#' + dumbList[j].id).detach().appendTo('#' + this.id)
+              updateListCounters(dumbList[j], '#' + this.id, '#' + dumbList[j].classList[3] + '_list')
               dumbList.splice(j, 1);
               j = dumbList.length
             }
@@ -567,4 +571,9 @@ function triExpired(id) {
 
   return triEndDate < new Date(); // Return triEndDate has already occured
 
+}
+
+function setName(name) {
+  $('#student-name').empty();
+  $('#student-name').append("Welcome " + name);
 }
