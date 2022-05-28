@@ -137,7 +137,7 @@ function filterUnitsByCompleted(completedUnits, studentTotalOptions) {
       if (completedUnits.includes(unit['Code'])) {
         newSubArr[1] = parseInt(newSubArr[1]) - parseInt(unit['CP'])
         completedFilter.push(unit['Code']);
-        unit['CP'] = '0'
+        //unit['CP'] = '0'
       } else {
         newSubArr.push(unit);
       }
@@ -301,7 +301,7 @@ function buildUnitList(listName, arr) {
     '      <div class="column_header column ' + listName + '_column">' +
     '        <h4 id = "' + listName + '_counter">' + arr[1] + 'CP ' + arr[0] + ':</h4>' +
     '      </div>' +
-    '      <ul class="unit_list" id="' + listName + '_unit_list"></ul>' +
+    '      <ul class="unit_list available_units" id="' + listName + '_unit_list"></ul>' +
     '    </li>')
 
   // put units in the list
@@ -458,11 +458,18 @@ function resetDrags() {
 function autoFill(unitsPerTri) {
 
   dumbList = []
+  //$('.available_units > .unit').each(function (){
+  //  var str = $(this).parent().parent().html()
+  //  console.log(str.slice(str.indexOf('counter">')+9,str.indexOf('counter">')+10))
+  //})
+
+
   $('.unit').each(function () {
     dumbList.push(this)
   })
-  // build list
-  // sort list
+  // TODO: build list properly
+  // favour 3rd tri units 
+  // the pre-req magic needs to be called here
   // track 100's
   // track 300's
   // get/track totalRequired cp
@@ -482,10 +489,15 @@ function autoFill(unitsPerTri) {
             let unitTris = cl.slice(cl.indexOf('tri_') + 4, cl.indexOf('tri_') + 7)
 
             if (unitTris.includes((this.id + '')[1])) {
-              $('#' + dumbList[j].id).detach().appendTo('#' + this.id)
-              updateListCounters(dumbList[j], '#' + this.id, '#' + dumbList[j].classList[3] + '_list')
-              dumbList.splice(j, 1);
-              j = dumbList.length
+              var str = $('#' + dumbList[j].classList[3] + '_list').parent().html()
+              var parentCounter = parseInt(str.slice(str.indexOf('counter">')+9,str.indexOf('counter">')+10))
+              if(parentCounter > 0 ){  // checking list counter is > 0
+                $('#' + dumbList[j].id).detach().appendTo('#' + this.id)
+
+                updateListCounters(dumbList[j], '#' + this.id, '#' + dumbList[j].classList[3] + '_list')
+                dumbList.splice(j, 1);
+                j = dumbList.length
+              }
             }
 
           }
