@@ -1,7 +1,6 @@
 var arrForDragula = [];
 // this is a global because the func that adds it up is recursive
 let cpCountforElecPad = 0
-// var duration = 6;
 
 window.onload = function () {
 
@@ -32,7 +31,6 @@ window.onload = function () {
       buildYearGrid(startYear, 10);
       fillCompleted(studentData);
       drake = callDragula(studentTotalOptions);
-      // anything that happens after file upload has to be called here
 
     };
     reader.readAsText(input);
@@ -42,6 +40,12 @@ window.onload = function () {
 }
 
 
+/*----------------------------------------------------
+  handleUpload()
+  
+  arg:  .csv object uploaded via html    
+  returns:  dict  { 'key' : 'value', 'key' : 'value', etc }
+-------------------------------------------------*/
 function handleUpload(uploaded) {
 
   // break .csv into 2 arrays and clean them up
@@ -89,7 +93,6 @@ function removeNewlines(arr) {
   arg:      dict of student data (from csv) { key:value, key:[val1,val2] }
   arg:      entire data.js file 
   returns:  array of total student options: [ [core],[major],[minor] ]
-  side-effect  - null
 -------------------------------------------------*/
 
 function filterUnitsByDegree(studentData, dummyData) {
@@ -163,7 +166,6 @@ function filterUnitsByCompleted(completedUnits, studentTotalOptions) {
 
   arg:      dict of student data (from csv) { key:value, key:[val1,val2] }
   returns:  messy array of 'unit blocks' - eg: majors, minors, pre-existing qualifications [ str,str,str ]
-  side-effect  - null
 ------------------------------------------------- */
 
 function gatherVariantCodes(studentData) {
@@ -209,6 +211,16 @@ function gatherVariantCodes(studentData) {
 
 // ------------------- all UI stuff below -------------------
 
+/*----------------------------------------------------
+  selectDegree()
+  this tricky devil recursively checks if the current dimesion is a dict of units or, 
+  dict of dicts by checking the 2nd value, and calling a gui build func, or itself
+
+  arg:  multi dimentinal dict of dicts
+  returns:  null
+  side-effect  - global:  cpCountforElecPad is added up here
+  side effect  - calls buildUnitList() which has proforms gui building
+-------------------------------------------------*/
 function selectDegree(arr) {
   if (typeof (arr[1]) === 'number') {
     buildUnitList(arr[0], arr)
@@ -221,13 +233,15 @@ function selectDegree(arr) {
 }
 
 
+/*----------------------------------------------------
+  fillCompleted()
 
+  arg:  array - all student info
+  returns:  null
+  side-effect  - proforms gui building ( student info box and completed units )
+  side effect  - calls padWithElectives() which has proforms gui building
+-------------------------------------------------*/
 function fillCompleted(studentData) {
-
-  //STUDENTNUMBER,COURSE_CD,COURSE_TITLE,COURSE_VERSION,COURSE_ATTEMPT_STATUS,MODE,TYPE,ORG_UNIT_CD,
-  //COMMENCEMENT_DT,ENROLLED_CURRENT_TP,ENROLLED_YR,STUDENT_TYPE,CREDIT_POINTS_REQUIRED,ADVANCED STANDING CP,
-  //COMPLETED_CREDIT_POINTS,OUTSTANDING_POINTS,Course Location,Completed Units,Adv Stnd Units,
-  //Unit Sets (Completed),Unit Sets (Non-Completed)
 
   $('#studentInfoBox').empty()
   var completedCP = 0;
@@ -268,7 +282,14 @@ function fillCompleted(studentData) {
 }
 
 
+/*----------------------------------------------------
+  padWithElectives()
 
+  arg:  int - total req cp for course
+  returns:  null
+  side-effect  - proforms gui building ( makes elective unit tiles )
+  side effect  - adds to global arrForDragula[]
+-------------------------------------------------*/
 function padWithElectives(requiredCP) {
 
   let numberOfElectives = requiredCP - cpCountforElecPad
@@ -287,7 +308,15 @@ function padWithElectives(requiredCP) {
 }
 
 
+/*----------------------------------------------------
+  buildUnitList()
 
+  arg:  string  name of list (core, listed_1 etc..)
+  arg:  arr -unit list
+  returns:  null
+  side-effect  - proforms gui building ( makes unit tiles and boxes for them )
+  side effect  - adds to global arrForDragula[]
+-------------------------------------------------*/
 function buildUnitList(listName, arr) {
 
   // make the list
@@ -316,7 +345,15 @@ function buildUnitList(listName, arr) {
 }
 
 
+/*----------------------------------------------------
+  updateListCounters()
 
+  arg:  unit tile div
+  arg:  unit list div
+  arg:  unit list div
+  returns:  null
+  side-effect  - proforms gui building ( changes cp counters )
+-------------------------------------------------*/
 function updateListCounters(el, target, source) {    //  called everytime something is droped 
 
   let list = el.classList + '';
@@ -344,6 +381,13 @@ function updateListCounters(el, target, source) {    //  called everytime someth
 }
 
 
+/*----------------------------------------------------
+  highlightDropOptions()
+
+  arg:  class list of 'picked up' unit div
+  returns:  null
+  side-effect  - proforms gui stuff ( handles .dropable only)
+-------------------------------------------------*/
 function highlightDropOptions(list) {     //  called everytime something is draged 
 
   $('.dropable').each(function () {
@@ -365,7 +409,15 @@ function highlightDropOptions(list) {     //  called everytime something is drag
 }
 
 
+/*----------------------------------------------------
+  buildYearGrid()
 
+  arg:  int
+  arg:  int
+  returns:  null
+  side-effect  - proforms gui stuff
+  side-effect  - adds to global arrForDragula[]
+-------------------------------------------------*/
 function buildYearGrid(startYear, numberOfYears) {
 
   const boxes = Array.from(document.getElementsByClassName('year_box'));
@@ -398,7 +450,14 @@ function buildYearGrid(startYear, numberOfYears) {
 }
 
 
+/*----------------------------------------------------
+  getUnitDetails()
 
+  arg:  div object
+  arg:  arr of dicts
+  returns:  null
+  side-effect  - proforms gui stuff
+-------------------------------------------------*/
 function getUnitDetails(handle, studentTotalOptions) {
 
   var code = handle.firstChild.outerHTML.substr(3, 7);
@@ -439,6 +498,12 @@ function getUnitDetails(handle, studentTotalOptions) {
 }
 
 
+/*----------------------------------------------------
+  resetDrags()
+
+  returns:  null
+  side-effect  - proforms gui stuff
+-------------------------------------------------*/
 function resetDrags() {
 
   $('.unit').each(function () {
@@ -454,26 +519,27 @@ function resetDrags() {
 }
 
 
+/*----------------------------------------------------
+  autoFill()
 
+  arg:  int
+  returns:  null
+  side-effect  - proforms gui stuff, lots of it
+-------------------------------------------------*/
 function autoFill(unitsPerTri) {
 
   dumbList = []
-  //$('.available_units > .unit').each(function (){
-  //  var str = $(this).parent().parent().html()
-  //  console.log(str.slice(str.indexOf('counter">')+9,str.indexOf('counter">')+10))
-  //})
-
 
   $('.unit').each(function () {
     dumbList.push(this)
   })
-  // TODO: build list properly
-  // favour 3rd tri units 
-  // the pre-req magic needs to be called here
-  // track 100's
-  // track 300's
-  // get/track totalRequired cp
-
+  // TODO: build list properly  -easy
+  // favour 3rd tri units   -easy
+  // the pre-req magic needs to be called here  -voodoo
+  // track 100's  -easy
+  // track 300's  -easy
+  // get/track totalRequired cp  -very easy
+  // get smarterer   -tell'm he's dream'n
 
   $('.trimester_box .unit_list').each(function () {
 
@@ -499,9 +565,7 @@ function autoFill(unitsPerTri) {
                 j = dumbList.length
               }
             }
-
           }
-
         }
       }
     }
@@ -570,7 +634,6 @@ function callDragula(studentTotalOptions) {
         $(this).removeClass('dropable');
       });
     })
-  //.on('drag', function (el,handle) {    highlightDropOptions(el.classList+'');  });
 }
 
 

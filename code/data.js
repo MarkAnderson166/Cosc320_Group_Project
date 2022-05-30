@@ -1076,7 +1076,7 @@ var dummyData = {
       },
 
 
-  // ---- minors   ( copy of majors with minor variations )
+  // ---- minors   ( copy of majors with minor variations not done )
   /*
     // ----- majors
   

@@ -1,10 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Arimo:400,700|Roboto+Slab:400,700");
 
-/* :root {
-  font-size: calc(0.5vw + 1vh);
-  background: rgb(136, 194, 97);
-} */
-
 body {
   font-family: 'Open Sans', sans-serif;
   font-style: normal;
@@ -14,20 +9,16 @@ body {
   background-color: #3d3d3d;
 }
 
-
-
 .container {
   background-color: #e9e8e6;
   padding: 20px;
   margin-top: 20px;
 }
 
-
 * {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
-
 
 h1,
 h4 {
@@ -40,38 +31,15 @@ header h1 {
   margin: 4rem auto;
 }
 
-
 p {
   font-family: "Roboto Slab", serif;
 }
-
-/* a,
-a:link,
-a:active,
-a:visited {
-  color: #0066aa;
-  text-decoration: none;
-  border-bottom: #000013 0.16rem solid;
-} */
-
-/* a:hover {
-  color: #000013;
-  border-bottom: #0066aa 0.16rem solid;
-} */
 
 header,
 footer {
   margin: 2rem auto;
   text-align: center;
 }
-
-/* #main_container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  background-color: #4d4a42;
-  max-width: 59.5rem;
-} */
 
 #availableUnits {
   width: 50%;
@@ -94,32 +62,17 @@ footer {
 }
 
 .column {
-  /* margin: 0.6rem 0.6rem; */
-  /* background: #727171;
-  border: #000013 0.2rem solid;
-  border-radius: 0.4rem; */
   color: white;
   font-weight: bold;
 }
 
-/* .middleColumn .column{
-  width: 23.4%;
-  margin: 0.6rem 0.3rem;
-} */
-
 .column_header {
   padding: 0.1rem;
-  /* margin: -1rem 0.6rem; */
-
 }
 
 .column_header h4 {
   text-align: center;
-  /* border: #000013 0.2rem solid; */
-  /* border-radius: .6rem; */
-  /* box-shadow: #442626; */
   font-size: medium;
-
 }
 
 
@@ -288,35 +241,6 @@ footer {
   box-shadow: 0 3px 5px rgb(70, 70, 70);
 }
 
-
-/* .hoverable:hover {
-  color: white;
-  background-color: #442626;
-  border-color: #ffffff;
-  box-shadow:  0 3px 5px rgb(70, 70, 70);
-} */
-
-/* .leftColumn{
-  max-width: 15rem;
-}
-.middleColumn{
-  max-width: 35rem;
-}
-.rightColumn{
-  max-width: 15rem;
-} */
-/* .year_box{ 
-  float: left;
-  width: 33.6rem;
-  background: #273823;
-  border-radius: 0.6rem;
-
-}
-.trimester_box {
-  float: left;
-  width: 11.2rem;
-  min-height: 10.4rem;
-} */
 .trimester_box_header {
   font-size: medium;
   font-weight: bold;
@@ -355,28 +279,6 @@ li {
   list-style-type: none;
 }
 
-/*
-.button {
-  font-family: "Arimo", sans-serif;
-  font-weight: 700;
-  border: #000013 0.14rem solid;
-  border-radius: 0.2rem;
-  color: #000013;
-  padding: 0.6rem 1rem;
-  margin-bottom: 0.3rem;
-  cursor: pointer;
-}
-
-.delete-button {
-  background-color: #ff4444;
-  margin: 0.1rem auto 0.6rem auto;
-}
-
-.delete-button:hover {
-  background-color: #fa7070;
-}
-*/
-
 .unit {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -389,38 +291,18 @@ li {
   -webkit-transition: all 0.3s;
   transition: all 0.3s;
   height: 4rem;
-  /* border: #000013 0.15rem solid;
-  border-radius: 0.4rem; */
   cursor: move;
   text-align: center;
   vertical-align: middle;
   font-size: 1.1rem;
   margin: 0.4rem;
   max-height: 2.2rem;
-  /* min-width: 10.5rem; */
 }
 
 .completedUnit {
   cursor: pointer;
 }
 
-/*
-.trimester_box .unit{
-  max-height: 2.2rem;
-}
-*/
-
-/*
-#unitText {
-  background: #fff;
-
-  text-align: center;
-  font-family: "Roboto Slab", serif;
-  height: 4rem;
-  width: 7rem;
-  margin: auto 0.8rem auto 0.1rem;
-}
-*/
 .unit p {
   margin: auto;
 }
@@ -437,28 +319,6 @@ h2 {
   color: #7d5177;
 }
 
-/* .infoBox{
-  height: 9rem;
-  border: #000013 0.2rem solid;
-  border-radius: .6rem;
-  cursor: move;
-  vertical-align: middle;
-  font-size: 1.4rem;
-  margin: .6rem 0.1rem;
-  background: #acacac;
-
-} */
-
-
-/* .studentInfoBox{
-  float: left;
-  width: 25%;
-}
-
-.unitInfoBox{
-  float: left;
-  width: 73%;
-}  */
 .infoBox h3 {
   text-align: center;
   line-height: 0;
