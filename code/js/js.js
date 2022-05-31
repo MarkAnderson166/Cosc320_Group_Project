@@ -28,7 +28,7 @@ window.onload = function () {
       $('#leftColumn').empty()
       $('#rightColumn').empty()
       selectDegree(studentRemainingOptions);
-      buildYearGrid(startYear, 10);
+      buildYearGrid(startYear, $('select').val());
       fillCompleted(studentData);
       drake = callDragula(studentTotalOptions);
 
@@ -556,8 +556,8 @@ function autoFill(unitsPerTri) {
 
             if (unitTris.includes((this.id + '')[1])) {
               var str = $('#' + dumbList[j].classList[3] + '_list').parent().html()
-              var parentCounter = parseInt(str.slice(str.indexOf('counter">')+9,str.indexOf('counter">')+10))
-              if(parentCounter > 0 ){  // checking list counter is > 0
+              var parentCounter = parseInt(str.slice(str.indexOf('counter">') + 9, str.indexOf('counter">') + 10))
+              if (parentCounter > 0) {  // checking list counter is > 0
                 $('#' + dumbList[j].id).detach().appendTo('#' + this.id)
 
                 updateListCounters(dumbList[j], '#' + this.id, '#' + dumbList[j].classList[3] + '_list')
@@ -652,3 +652,7 @@ function setName(name) {
   $('#student-name').empty();
   $('#student-name').append("Welcome " + name);
 }
+
+$(document).ready(function () {
+  $('select').formSelect();
+});

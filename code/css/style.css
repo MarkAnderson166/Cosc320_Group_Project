@@ -328,6 +328,10 @@ h2 {
   font-size: medium;
 }
 
+#calendar h3 {
+  text-align: center;
+}
+
 
 /* Dropdown Button */
 .dropbtn {

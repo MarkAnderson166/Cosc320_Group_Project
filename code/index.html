@@ -61,6 +61,7 @@
       <h5>3.</h5>
       <p>You can then drag units into your preferred trimesters.</p>
       <p>Or, you can look at the recommended roadmap by pressing "Recommended".</p>
+
       <form id="csv_upload_form">
         <div class="file-field input-field">
           <div class="btn btn-primary">
@@ -72,8 +73,18 @@
             <input class="file-path validate" type="text">
           </div>
         </div>
+        <h4>Calendar:</h4>
+        <div class="input-field col s12">
+          <select id="year-select">
+            <option value="10" selected>Select calendar size</option>
+            <option value="2">2 Years</option>
+            <option value="4">4 Years</option>
+            <option value="6">6 Years</option>
+          </select>
+        </div>
         <h4>Name:</h4>
         <input type="text" id="name-input" />
+        <br><br><br>
         <button class="btn waves-effect waves-light modal-close" type="submit" name="action">
           Submit
           <i class="material-icons right">send</i>
@@ -98,11 +109,12 @@
       </div>
       <!-- Calendar -->
       <div id="calendar" class="calendar  col l6 m6 s12">
-        <h3>Autofill Tool</h3>
-        <button class="btn" onclick="autoFill(4)"> Recommend FT </button>
-        <button class="btn" onclick="autoFill(2)"> Recommend PT </button>
-        <button class="btn grey" onclick="resetDrags()"> Reset
-        </button>
+        <h3>Autofill Tool<br><br><button class="btn" onclick="autoFill(4)"> Recommend FT </button>
+          <button class="btn" onclick="autoFill(2)"> Recommend PT </button>
+          <button class="btn grey" onclick="resetDrags()"> Reset
+          </button>
+        </h3>
+
         <br><br>
         <h3>Calendar</h3>
       </div>
