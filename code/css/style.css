@@ -331,6 +331,9 @@ h2 {
 #calendar h3 {
   text-align: center;
 }
+.floatRight{
+  float: right;
+}
 
 
 /* Dropdown Button */

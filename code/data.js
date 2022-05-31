@@ -2058,3 +2058,20 @@ var dummyData = {
 
 }
 
+const demoStudent =
+{ 'STUDENTNUMBER': "Jester LaVore",
+  'COURSE_CD': 'BCOMP',
+  'COURSE_TITLE': 'Bachelor of Computer Science', 
+  'ADVANCED STANDING CP': "0",
+  'Adv Stnd Units': "",
+  'COMMENCEMENT_DT': "3/8/2021",
+  'Completed Units': [
+  "PHYS100 TRI-1 2021 OL", "AMTH140 TRI-2 2021 OL", "COSC110 TRI-3 2021 OL",
+  "MTHS120 TRI-1 2021 OL", "COSC120 TRI-2 2021 OL", "STAT100 TRI-3 2021 OL",		
+  "COSC101 TRI-1 2021 OL", "COSC120 TRI-2 2021 OL",],
+  'CREDIT_POINTS_REQUIRED': "144",
+  'COMPLETED_CREDIT_POINTS': "48",
+  'OUTSTANDING_POINTS': "96",
+  'Unit Sets (Completed)': "",
+  "Unit Sets (Non-Completed)\r": ["SOFTDEV002.5 N Software Development" ]
+}

@@ -8,8 +8,7 @@ window.onload = function () {
     e.preventDefault();
     const input = csvFile.files[0];
     const reader = new FileReader();
-    const name = document.getElementById('name-input').value;
-    setName(name);
+
 
     reader.onload = function (e) {
 
@@ -17,26 +16,57 @@ window.onload = function () {
       arrForDragula = [];
       cpCountforElecPad = 0
 
+      const name = document.getElementById('name-input').value;
+      setName(name);
       const studentData = handleUpload(e.target.result);
 
-      const completedUnits = ((studentData['Completed Units'] + studentData['Adv Stnd Units']).replace(/(['",])/g, ' ')).split(' ')
-      const studentTotalOptions = filterUnitsByDegree(studentData, dummyData)
-      const studentRemainingOptions = filterUnitsByCompleted(completedUnits, studentTotalOptions)
-
-      // make ui
-      var startYear = parseInt(studentData['COMMENCEMENT_DT'].substr(-4, 4));
-      $('#leftColumn').empty()
-      $('#rightColumn').empty()
-      selectDegree(studentRemainingOptions);
-      buildYearGrid(startYear, $('select').val());
-      fillCompleted(studentData);
-      drake = callDragula(studentTotalOptions);
+      buildGUI(studentData, $('select').val())
 
     };
     reader.readAsText(input);
   });
   // Open the modal on page load
   M.Modal.getInstance($('.modal')).open();
+}
+
+
+/*----------------------------------------------------
+  buildGUI()
+  
+  arg:  dict, student data via upload or demo  
+  arg:  int   calendar length in years 
+  returns:  nul
+  side effects:  ..  everything, this is effectvley main()
+-------------------------------------------------*/
+function buildGUI(studentData, duration) {
+
+  const completedUnits = ((studentData['Completed Units'] + studentData['Adv Stnd Units']).replace(/(['",])/g, ' ')).split(' ')
+  const studentTotalOptions = filterUnitsByDegree(studentData, dummyData)
+  const studentRemainingOptions = filterUnitsByCompleted(completedUnits, studentTotalOptions)
+
+  // make ui
+  var startYear = parseInt(studentData['COMMENCEMENT_DT'].substr(-4, 4));
+  $('#leftColumn').empty()
+  $('#rightColumn').empty()
+  selectDegree(studentRemainingOptions);
+  buildYearGrid(startYear, duration);
+  fillCompleted(studentData);
+  drake = callDragula(studentTotalOptions);
+}
+
+
+/*----------------------------------------------------
+  loadDemoData()
+  
+  arg:  null    
+  returns:  null
+  side effects:  gui, just calls buildGUI() without upload
+-------------------------------------------------*/
+function loadDemoData(){
+  arrForDragula = [];
+  cpCountforElecPad = 0
+  setName(demoStudent['STUDENTNUMBER']);
+  buildGUI(demoStudent, 5)
 }
 
 
@@ -248,7 +278,7 @@ function fillCompleted(studentData) {
   var requiredCP = 0;
   $('#studentInfoBox').append('<h3>Course Progress</h3><br>')
   $.each(studentData, function (key, value) {
-    if (key == 'STUDENTNUMBER') {
+    if (key == 'COURSE_CD') {
       $('#studentInfoBox').append('Course: ' + value + '<br>')
     }
     value == "" ? value = "0" : null;
@@ -527,7 +557,7 @@ function resetDrags() {
   side-effect  - proforms gui stuff, lots of it
 -------------------------------------------------*/
 function autoFill(unitsPerTri) {
-
+  resetDrags()
   dumbList = []
 
   $('.unit').each(function () {
