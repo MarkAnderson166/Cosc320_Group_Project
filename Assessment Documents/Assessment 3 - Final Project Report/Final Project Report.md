@@ -20,7 +20,7 @@ The brief from the client was to create a system that could automate a process t
 
 Students would be able to use this system directly without any intervention from the client which would allow them to obtain a quick turnaround. Also, this would free up valuable staff resources at the client as they are not having to perform time-consuming manual interpretations of the student’s degree.
 
-No only can the student see how far they have progressed, the are able to plan their future course enrollment by using the flexible “drag-and-drop” Roadmap Designer functionality. The student can use calendar functionality to decide which units they want to complete in each trimester. This interactive feature makes it very easy for the student to look at various “what-if” scenarios. Alternatively they are able to use a system generated roadmap by using the recommended options
+Not only can the student see how far they have progressed, the are able to plan their future course enrollment by using the flexible “drag-and-drop” Roadmap Designer functionality. The student can use calendar functionality to decide which units they want to complete in each trimester. This interactive feature makes it very easy for the student to look at various “what-if” scenarios. Alternatively they are able to use a system generated roadmap by using the recommended options
 
 
 ## A description of your application/software
@@ -37,27 +37,50 @@ No only can the student see how far they have progressed, the are able to plan t
 
 - Nicky: interaction with client, (pretty bad) facilitation, documentation, 1 x code update 
 
+- Mark:  
+  Unit and rules data structure design, Dummy data creation and tools, Upload function  
+  Filter functions for course variant, year, advanced standing, and completed units to determine student progression  
+  Dragula Library intergration, Building GUI elements (unit lists, calendar boxes)  
+  'Open-slot' highlighting, List CP counters, Auto-fill function  
+
 
 ## List of requirements and deliverables (completed, remaining, additional).
-Completed
 
+### Completed
 
-Remaining 
+Concise project description from initial contact with client:
+"What we need is for a student to be able to dump their data into a database, they choose their course and when they started (or it reads the course version) and throws out the units they have left. Then if it can create a plan for them, then that would be great also."
+Our current prototype has met this requirement for students completing a bcomp or nursing degree, and to a lesser extent an arts degree.
+
+"We need a solid record of how long it takes to put these together so we can get a cost analysis of how much it would cost to build something like this."
+___clockify___ ?
+
+### Remaining 
+
 - prereqisites
-  Tha abbility to account for prereqisits is not currently in the code. It is not anticipated to be hard to implement, However the volume of data entry required to make it useful inhibited development.
+  Tha ability to account for prereqisits is not currently in the code. It is not anticipated to be hard to implement, However the volume of data entry required to make it useful inhibited development.
   If this project or one like it gets access to usable unit data in future, adding a function to more intelligently select units accounting for prerequisits would be relativly simple.
 
 - The calendar 'recommender' is not intelligent at all. Some small tweaks would acheive alot, but we've run out of time.
   While it currently favours doing 100 level units early and 300's later, it regually gets some very wrong. for example it almost always puts 320 in the first year, and often recommends students do MTHS130, which is absolute madness.
   A large improvement to anticipate future pre-reqs (to avoid 'locks' that would arise), or recommend majors (for ba/bsc) would require significantly more work.
 
-
-
-Additional ??
-
 - Units that stretch over multiple trimesters were not concidered at all in this design.
+
+### Additional
+
+The entire 'drag'n'drop' interactive system is additional to our given requirments.
+Originally we were asked to automate the creation of course plans given individual student data, and our system does that.
+But the primary functionality we have developed is a user focused interface to visually guide the student or staff member to create their own personalised plan.
+
+Being a user-focused app appropriate for students, additional features were considered but not implemented so to not stray too far from our original mandate.  
+Additional features were considered included:
 - login and/or Save and load functions for returning students. This could be done with cookies, url extentions, or a basic DB on a webserver.
 - The project is currently client-side only, adding some basic server functionality could allow user saving, and usage statistics very easily.
+- printable version of created timetable.
+
+A late addition was the 'sample student'. Implemented as a way to use the app without uploading individual student information this feature allows the user to start a plan from scratch.  
+Extending this feature with a menu to select between degree's and majors would further aim this app towards students using it to create personalised plans, rather than our mandated requirements of producing a set plan and using it to check completion.
 
 
 ## Bug report (issue log and resolution).
