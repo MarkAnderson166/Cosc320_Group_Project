@@ -35,14 +35,22 @@ Not only can the student see how far they have progressed, the are able to plan 
 ## Summary of individual contributions by group members. 
 - need some info here from everyone
 
-- Nicky: interaction with client, (pretty bad) facilitation, documentation, 1 x code update 
+- Nicky: 
+  - interaction with client, 
+  - (pretty bad) facilitation, 
+  - documentation, 
+  - 1 x code update 
 
 - Mark:  
-  Unit and rules data structure design, Dummy data creation and tools, Upload function  
-  Filter functions for course variant, year, advanced standing, and completed units to determine student progression  
-  Dragula Library intergration, Building GUI elements (unit lists, calendar boxes)  
-  'Open-slot' highlighting, List CP counters, Auto-fill function  
+    - Unit and rules data structure design, Dummy data creation and tools, Upload function  
+    - Filter functions for course variant, year, advanced standing, and completed units to determine student progression  
+    - Dragula Library intergration, Building GUI elements (unit lists, calendar boxes)  
+    - 'Open-slot' highlighting, List CP counters, Auto-fill function  
 
+- Nelson:
+    - Helped develop the front end specifically worked on implementing the materialize css framework
+    - Helped ensure that the UI had a modern look
+    - Tried to make sure our app would fit into the UNE ecosystem by using UNE Brand Toolkit for inspiration
 
 ## List of requirements and deliverables (completed, remaining, additional).
 
@@ -116,6 +124,11 @@ Extending this feature with a menu to select between degree's and majors would f
   If the call had been made early to focus only on bcomp and nursing, the entire development process would have been far simpler. As it stands B.A degrees are only partially working despite a tremendous amount of time being spent just entering unit data, and bsc degrees don't work at all. For a prototype, I consider this a large waste of time.
 
 - Breaking up the code
-  Coupled with taking an OOP approach, breaking up large and/or complicated files would have simplified development as the project grew. for eg: taking all of the colouring out of the main .css and taking the GUI-only functions and dragula library API stuff out of the main .js.  
+  Coupled with taking an OOP approach, breaking up large and/or complicated files would have simplified development as the project grew. for eg: taking all of the colouring out of the main .css and taking the GUI-only functions and dragula library API stuff out of the main .js.  More modular code would be easier to maintain over time.
 
 - At least glance at the final assesment before the final week, just in case keeping a diary or records is required.....
+
+- Having weekly meetings helped ensure the project was moving forward and kept everyone together
+- Working with a client can lead to unexpected outcomes (we were expecting the data to be given to us in a certain manner based on our initial client meeting but then received something completely different
+- Working across different timezones are both a blessing and curse: harder to schedule meetings but less likely to have merge conflicts
+- Having different strengths/programming styles can make working on the same code more challenging. This is probably why places like Google and others have code style guides
