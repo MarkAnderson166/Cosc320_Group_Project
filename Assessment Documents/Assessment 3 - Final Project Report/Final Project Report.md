@@ -51,6 +51,13 @@ Not only can the student see how far they have progressed, the are able to plan 
     - Helped develop the front end specifically worked on implementing the materialize css framework
     - Helped ensure that the UI had a modern look
     - Tried to make sure our app would fit into the UNE ecosystem by using UNE Brand Toolkit for inspiration
+    
+- Tully: Full stack developer
+    - Initial API data analysis
+    - Helped develop front-end UI components
+    - Helped develop back-end functionality
+    - Focused on client-specific requests and bug fixes
+    - Presented and received feedback from client employees
 
 ## List of requirements and deliverables (completed, remaining, additional).
 
