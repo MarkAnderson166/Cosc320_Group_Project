@@ -295,7 +295,7 @@ function fillCompleted(studentData) {
     }
   })
 
-  $('#studentInfoBox').append('Require: ' + requiredCP + 'cp<br>')
+  $('#studentInfoBox').append('<span id="remain_label">Require: ' + requiredCP + 'cp</span><br>')
   $('#studentInfoBox').append('Completed: ' + completedCP + 'cp<br>')
   let percentComplete = (completedCP / requiredCP) * 100;
   $('#studentInfoBox').append('<div class="w3-border"><div class="w3-green w3-center" style="height:24px;width:' + percentComplete + '%">' + percentComplete + '%</div></div><br>')
@@ -392,14 +392,16 @@ function updateListCounters(el, target, source) {    //  called everytime someth
   let cpValue = parseInt(list.slice(list.indexOf('cp_') + 3, list.indexOf('cp_') + 5));
 
   let listOfLists = document.querySelectorAll('[id*="_unit_list"]')
+  var totalRemainingAfterDrag = 0
 
   listOfLists.forEach(list => {
+    var idTagSelc = list.id.slice(0, list.id.indexOf('_unit')) + '_counter'
+    var counterString = $('#' + idTagSelc).html();
+    var curretCp = parseInt(counterString.slice(0, counterString.indexOf('CP')));
+    totalRemainingAfterDrag = curretCp+totalRemainingAfterDrag
+    label = counterString.slice(counterString.indexOf('CP'));
+    $('#remain_label').html($('#remain_label').html().slice(0,15)+' ('+totalRemainingAfterDrag+')')
     if (list.id.slice(0, list.id.indexOf('_list')) == unittype) {
-
-      var idTagSelc = list.id.slice(0, list.id.indexOf('_unit')) + '_counter'
-      var counterString = $('#' + idTagSelc).html();
-      var curretCp = parseInt(counterString.slice(0, counterString.indexOf('CP')));
-      label = counterString.slice(counterString.indexOf('CP'));
       if (source.includes(unittype) && !target.includes(unittype)) { // unit taken from origin list
         $('#' + idTagSelc).html((curretCp - cpValue) + label);
       }
